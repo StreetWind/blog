@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Wind Blog
-subtitle: 陌风个人github博客
+title: Wind 博客
+subtitle:
 description: 技术站点博客
 author: Wind
 language: zh-Hans
@@ -72,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: spfk
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
