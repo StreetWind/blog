@@ -7,10 +7,10 @@ install:
 
 
 before_script:
-  npm install -g gulp
+  npm install hexo-cli -g
 
 script:
-  - hexo g
+  - hexo generate
 
 after_script:
   - cd ./public
