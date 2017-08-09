@@ -27,4 +27,4 @@ branches:
     - hexo
 env:
  global:
-   - GH_REF: github.com/MitchWind/blog.git
+   - GH_REF: github.com/StreetWind/blog.git
