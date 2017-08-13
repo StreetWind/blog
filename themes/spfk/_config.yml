@@ -29,12 +29,12 @@ subnav:
   #zhihu: "#"
   #weibo: "#"
   #google: "#"
-  #twitter: "#"
+  twitter: "https://twitter.com/mofeng64"
   #linkedin: "#"
-  # facebook: "#"
-  # rss: /atom.xml
+  facebook: "https://www.facebook.com/profile.php?id=100004444324483&ref=bookmarks"
+  rss: /atom.xml
   # pinterest: "#"
-  # QQ: "#"
+  #QQ: "632599"
   # wechat: "#"
   # douban: "#"
   # pinboard: "#"

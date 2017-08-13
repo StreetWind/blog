@@ -7,7 +7,7 @@ title: Wind 博客
 subtitle:
 description: 技术站点博客
 author: Wind
-language: zh-Hans
+language: zh-cn
 timezone:
 
 # URL
@@ -15,7 +15,8 @@ timezone:
 url: https://www.rodewind.tk
 enforce_ssl: rodewind.tk
 root: /
-permalink: :year/:month/:day/:title/
+permalink: article/:abbrlink.html  # “posts/” 可自行更换
+#permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
@@ -72,10 +73,82 @@ pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+#插件设置
+#plugins:
+#    - hexo
 ## Themes: https://hexo.io/themes/
-theme: spfk
+#theme: tranquilpeak
+theme: next
+#theme: yilia
+#theme: material
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+
+#generator-json插件配置
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+
+
+#七牛云存储设置
+qiniu:
+  offline: false
+  sync: true
+  bucket: blog
+  #secret_file: sec/qn.json or C:
+  access_key: eqo3xkNpLt9xrq63xMMHimw_i2wsAz7qQNjGVF_A
+  secret_key: XqmJTJhuGaS_FrpbMZS-iW_gNoOYLUjhd_mc35RX
+  dirPrefix: 
+  urlPrefix: http://oujqv8vpt.bkt.clouddn.com
+  up_host: http://upload.qiniu.com
+  local_dir: cdn
+  update_exist: true
+  image: 
+    folder: images
+    extend: 
+  js:
+    folder: js
+  css:
+    folder: css
+
+# abbrlink config
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: des    # 进制：dec(default) and hex
+
+#站点搜索引擎地图
+sitemap:
+    path: sitemap.xml
+baidusitemap:
+    path: baidusitemap.xml
+
+
+#禁止爬虫出站
+nofollow:
+    enable: true
+    exclude: # 例外的链接，可将友情链接放置此处
+        - www.rodewind.tk
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'default'
+  line_number: false    # default false
