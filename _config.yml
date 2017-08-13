@@ -12,8 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.rodewind.tk
-enforce_ssl: rodewind.tk
+url: https://www.rodewind.com
+enforce_ssl: rodewind.com
 root: /
 permalink: article/:abbrlink.html  # “posts/” 可自行更换
 #permalink: :year/:month/:day/:title/
