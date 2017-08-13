@@ -1,0 +1,35 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+before_script:
+    npm install hexo-cli -g
+
+script:
+  - hexo generate
+
+after_script:
+  - rm -rf .git/
+  - git init
+  - git config user.name "Wind"
+  - git config user.email "mofeng64@gmail.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF1}" master:master
+# E: Build LifeCycle
+notifications:
+  slack:
+    on_success: never
+
+branches:
+  only:
+    - master
+env:
+ global:
+   - GH_REF: github.com/StreetWind/StreetWind.github.io.git
+   - GH_REF1: github.com/rodewind/rodewind.github.io.git
