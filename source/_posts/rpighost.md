@@ -66,5 +66,5 @@ ghost install
 7. 是否要设置SSL
 8. 安装系统，所以你可以轻松地启动和停止Ghost
 9. 是否要启动Ghost
-
+![2017-08-1601-24-397db36.png](https://moetu.fastmirror.org/images/2017/08/16/2017-08-1601-24-397db36.png)
 ![](https://i.loli.net/2017/08/16/59932e7de4b57.png)
