@@ -1,12 +1,12 @@
 ---
-layout: 
 title: 树莓派3安装Ghost博客
+tags: 'rpi,ghost'
+categories: 树莓派
+abbrlink: 4121126904
 date: 2017-08-16 00:28:31
 updated: 2017-08-16 00:28:31
-comments: 
-tags: rpi,ghost
-categories: 树莓派
-
+layout:
+comments:
 ---
 现在Ghost博客升级很快，1.0版本以上用Ghost-cli方法安装，本教程是树莓派安装1.5.2版本
 ## 1. 安装前准备
@@ -66,4 +66,4 @@ ghost install
 7. 是否要设置SSL
 8. 安装系统，所以你可以轻松地启动和停止Ghost
 9. 是否要启动Ghost
-![2017-08-1601-24-397db36.png](https://moetu.fastmirror.org/images/2017/08/16/2017-08-1601-24-397db36.png)
+![](https://ws1.sinaimg.cn/large/006VAXiDgy1filybxi2sgj30n90dbdpj.jpg)
