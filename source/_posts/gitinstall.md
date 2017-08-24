@@ -5,8 +5,8 @@ date: 2017-08-24 08:22:28
 updated: 2017-08-24 08:22:28
 comments: 
 tags: 
-    -git
-    -Linux
+    - git
+    - Linux
 categories: 工具
 ---
 ## arch Linux中Git命令自动补全
