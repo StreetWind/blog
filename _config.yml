@@ -61,6 +61,7 @@ category_map:
         学习: learn
         其他: other
         编程: programming
+        树莓派: rpilinux
 tag_map:
 
 # Date / Time format

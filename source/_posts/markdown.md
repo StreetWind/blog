@@ -1,7 +1,7 @@
 ---
 title: markdown学习比较
 tags: 学习
-categories: '学习,语法'
+categories: '学习'
 abbrlink: 2924683816
 date: 2017-08-14 00:41:44
 updated: 2017-08-14 00:41:44
@@ -22,6 +22,5 @@ comments:
 + **粗体**
 + ***加粗斜体***
 + ~~删除线~~
-
 
 
