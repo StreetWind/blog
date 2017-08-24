@@ -1,6 +1,6 @@
 ---
 title: 树莓派3安装Ghost博客
-tags: 'rpi,ghost'
+tags: 'rpi;ghost'
 categories: 树莓派
 abbrlink: 4121126904
 date: 2017-08-16 00:28:31
