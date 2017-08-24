@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Wind 博客
+title: Wind
 subtitle:
-description: 技术站点博客
+description: 风因雪而冷，冷而陌，陌而生。
 author: Wind
 language: zh-cn
 timezone:
@@ -82,6 +82,7 @@ theme: next
 #theme: ylion
 #theme: yilia
 #theme: material
+#theme: my
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
