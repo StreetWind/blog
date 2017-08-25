@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.rodewind.com
+  url: https://www.rodewind.com
 enforce_ssl: rodewind.com
 root: /
 permalink: article/:abbrlink/  # “posts/” 可自行更换
@@ -159,3 +159,9 @@ prism_plugin:
   mode: 'preprocess'    # realtime/preprocess
   theme: 'default'
   line_number: false    # default false
+
+baidu_url_submit:
+  count: 1 ## 提交最新的一个链接
+  host: www.rodewind.com ## 在百度站长平台中注册的域名
+  token: dAHZNeFLPCFytRFw ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
