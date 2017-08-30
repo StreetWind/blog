@@ -12,14 +12,14 @@ categories: 树莓派
 > 所以逼得没办法只能qemu模拟的方式启动树莓派系统。现在终于把数据库备份出来了。数据无价请做好备份！！哎！
 > 这次qemu方式加载中一个学习记录记住万一那天我又用上了不用在到处找了
 
-#Arch Linux Install QEMU
+# Arch Linux Install QEMU
 安装QEMU
 ```
 yaourt -S qemu
 #因为我们要运行arm架构所以安装qemu-arch-extra 包
 yaourt -S qemu-arch-extra 
 ```
-#环境准备
+# 环境准备
 #### 1. raspbian 镜像准备
 [官网下载](https://www.raspberrypi.org/downloads/)
 [下载库](https://downloads.raspberrypi.org/)
