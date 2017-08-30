@@ -1,5 +1,5 @@
 ---
-title: title
+title: qemu模拟arm架构运行raspberrypi
 layout: post
 date: 2017-08-29 17:48:52
 updated: 2017-08-30 22:21:00
