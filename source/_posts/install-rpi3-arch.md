@@ -172,3 +172,4 @@ dtparam=i2c_arm=on
 
 [无桌面参考](https://rocka.me/archive/my-first-archlinux-rpi3)
 [配置桌面环境参考](https://zhuanlan.zhihu.com/p/25988799)
+[arch中添加rc.locl启动](https://www.yumao.name/read/archlinux-systemd-rc-local/)
