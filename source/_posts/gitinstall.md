@@ -1,13 +1,14 @@
 ---
-layout: 
 title: git 常用配置
+tags:
+  - git
+  - Linux
+categories: 工具
+abbrlink: 4003623714
 date: 2017-08-24 08:22:28
 updated: 2017-08-24 08:22:28
-comments: 
-tags: 
-    - git
-    - Linux
-categories: 工具
+layout:
+comments:
 ---
 ## arch Linux中Git命令自动补全
 刚从基于Debian系统转到基于arch Linux系统，结果用Git命令的时候发现Git命令自动没办法使用。查看wiki文件两种解决办法

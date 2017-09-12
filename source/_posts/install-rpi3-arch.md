@@ -1,12 +1,13 @@
 ---
 title: 树莓派3下arch Linux arm 一些优化
 layout: post
-date: 2017-08-31 03:09:05
-updated: 2017-08-31 03:09:05
 tags:
   - rpi
   - arch
 categories: 树莓派
+abbrlink: 13694117
+date: 2017-08-31 03:09:05
+updated: 2017-08-31 03:09:05
 ---
 
 # 树莓派安装arch Linux 系统优化
