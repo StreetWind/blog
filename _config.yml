@@ -142,6 +142,14 @@ abbrlink:
   alg: crc32  # 算法：crc16(default) and crc32
   rep: des    # 进制：dec(default) and hex
 
+
+#搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
 #站点搜索引擎地图
 sitemap:
     path: sitemap.xml
