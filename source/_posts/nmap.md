@@ -4,6 +4,7 @@ layout: post
 tags:
     - Linux
 categories: 工具
+abbrlink: 7914343816
 date: 2017-11-30 14:47:00
 update: 2017-11-30 15:12:00
 layout:
