@@ -1,6 +1,5 @@
 ---
 title: nmap 常用命令速查
-layout: post
 tags:
     - Linux
 categories: 工具
