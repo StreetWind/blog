@@ -15,7 +15,7 @@ timezone:
 url: https://www.sysblz.com
 enforce_ssl: www.sysblz.com
 root: /
-permalink: article/:abbrlink/  # “posts/” 可自行更换
+permalink: article/:abbrlink.html  # “posts/” 可自行更换
 #permalink: :year/:month/:day/:title/
 permalink_defaults:
 
