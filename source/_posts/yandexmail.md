@@ -9,7 +9,7 @@ updated: "2017-12-08 08:56"
 abbrlink: 231249583
 comments:
 ---
-##自定义域名企业邮箱配置
+## 自定义域名企业邮箱配置
 >   因为，我有自己的域名就想用自己的域名做邮箱。结果国内腾讯，阿里之类的免费企业邮箱自定义域名现在都要备案。<br/>我域名没有备案搜索了一圈国外企业邮箱[zoho](https://www.zoho.com/mail/),和[YandexMail](https://mail.yandex.com/)
 ### YandexMail邮箱
  YandexMail邮箱支持自定义域名，是俄罗斯最大搜索引擎公司提供的。
