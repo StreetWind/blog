@@ -44,7 +44,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -53,7 +53,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -63,7 +63,9 @@ category_map:
         编程: programming
         树莓派: rpilinux
 tag_map:
-
+    其他: other
+    学习: Learn
+    #: Programming
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -124,14 +126,14 @@ qiniu:
   #secret_file: sec/qn.json or C:
   access_key: eqo3xkNpLt9xrq63xMMHimw_i2wsAz7qQNjGVF_A
   secret_key: XqmJTJhuGaS_FrpbMZS-iW_gNoOYLUjhd_mc35RX
-  dirPrefix: 
+  dirPrefix:
   urlPrefix: http://oujqv8vpt.bkt.clouddn.com
   up_host: http://upload.qiniu.com
   local_dir: cdn
   update_exist: true
-  image: 
+  image:
     folder: images
-    extend: 
+    extend:
   js:
     folder: js
   css:
@@ -173,4 +175,3 @@ baidu_url_submit:
   host: www.rodewind.com ## 在百度站长平台中注册的域名
   token: dAHZNeFLPCFytRFw ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
   path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
-  
