@@ -51,8 +51,10 @@ frontMatter: """
 title: "{title}"
 layout: "{layout}"
 tags:
-  - 
+  -
 categories:
+keywords:
+  - 
 date: "{date}"
 updated: "{date}"
 abbrlink:
