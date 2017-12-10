@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 颓废人生
+title: 颓废风
 subtitle:
 description: 风因雪而冷，冷而陌，陌而生。
 author: Wind
@@ -62,9 +62,11 @@ category_map:
         其他: other
         编程: programming
         树莓派: rpilinux
+        C#:netFramework
 tag_map:
     其他: other
     学习: Learn
+    工具: tools
     #: Programming
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -94,8 +96,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: s3 ## 这是我原来的deployer
-  bucket: hui-wang.info
+#- type: s3 ## 这是我原来的deployer
+#  bucket: hui-wang.info
 - type: baidu_url_submitter ## 这是新加的
 
 
