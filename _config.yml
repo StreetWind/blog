@@ -62,7 +62,6 @@ category_map:
         其他: other
         编程: programming
         树莓派: rpilinux
-        C#:netFramework
 tag_map:
     其他: other
     学习: Learn
@@ -96,8 +95,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: s3 ## 这是我原来的deployer
-  bucket: www.sysblz.com
+#- type: s3 ## 这是我原来的deployer
+#  bucket: www.sysblz.com
 - type: baidu_url_submitter ## 这是新加的
 
 
