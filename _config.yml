@@ -96,8 +96,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-#- type: s3 ## 这是我原来的deployer
-#  bucket: hui-wang.info
+- type: s3 ## 这是我原来的deployer
+  bucket: www.sysblz.com
 - type: baidu_url_submitter ## 这是新加的
 
 
