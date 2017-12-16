@@ -50,11 +50,12 @@ frontMatter: """
 ---
 title: "{title}"
 layout: "{layout}"
+categories:
+  - 
 tags:
   -
-categories:
 keywords:
-  - 
+  -
 date: "{date}"
 updated: "{date}"
 abbrlink:
