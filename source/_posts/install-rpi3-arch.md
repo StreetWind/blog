@@ -170,7 +170,43 @@ yaourt -S i2c-tools lm_sensors
 ```
 dtparam=i2c_arm=on
 ```
+## 11. 安装补全
+#### 11.1 shell自动高级补全
+```bash
+sudo pacman -S bash-completion
+```
+#### 11.2 git命令补全
+```bash
+sudo pacman -S git-completion
+```
+编辑用户环境变量~/.bashrc
+在最后添加下面一句
+```bash
+#completion
+[ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
+```
+## 12. 安装中文
+#### 12.1 中文环境支持
+修改/etc/locale.gen文件添加编码支持
+```bash
+#取消文件的下面两项
+en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+#执行下面命令更新安装
+sudo locale-gen
+sudo /etc/locale.conf
+#修改LANG
+LANG=en_US.UTF-8
+```
+#### 12.2 安装字体
+安装免费字体
+```bash
+sudo pacman -S noto-fonts-cjk cantarell-fonts
+#重启系统后应该是能显示中文
+```
+
 
 [无桌面参考](https://rocka.me/archive/my-first-archlinux-rpi3)
 [配置桌面环境参考](https://zhuanlan.zhihu.com/p/25988799)
 [arch中添加rc.locl启动](https://www.yumao.name/read/archlinux-systemd-rc-local/)
+

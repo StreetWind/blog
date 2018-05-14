@@ -18,6 +18,7 @@ sudo pacman -Syyu
 #### 安装yaourt
 ```
 sudo pacman -S base-devel yaourt
+sudo pacman -Syyu
 sudo pacman -S archlinuxcn-keyring
 ```
 #### 安装常用软件
