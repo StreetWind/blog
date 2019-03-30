@@ -6,7 +6,7 @@ tags:
 categories: 工具
 abbrlink: 4003623714
 date: 2017-08-24 08:22:28
-updated: 2017-08-24 08:22:28
+updated: 2019-03-30 19:32:00
 layout:
 comments:
 ---
@@ -73,6 +73,15 @@ ssh-add id_rsa
 ssh -T git@github.com
 #看到下面这一句说明验证成功
 #Hi leolee! You've successfully authenticated, but GitHub does not provide shell access.
+```
+5. 多用户认证
+修改~/.ssh/config
+```
+Host wind                   #Host 别名自定义
+    HostName github.com     #HostName 服务地址
+    User mofeng64@gmail.com #User 用户名
+    IdentityFile ~/work/db/github #密匙地址
+
 ```
 参考:
     [深入浅出Git权限校验](http://debugtalk.com/post/head-first-git-authority-verification/)

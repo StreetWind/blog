@@ -204,6 +204,22 @@ LANG=en_US.UTF-8
 sudo pacman -S noto-fonts-cjk cantarell-fonts
 #重启系统后应该是能显示中文
 ```
+## 13. WIFI配置
+#### 13.1 配置WIFI
+```bash
+cd /etc/netctl
+sudo install -m640 examples/wireless-wpa wpa
+sudo vim wpa
+#修改MyNetwork和WirelessKey（MyNetwork=WIFI名称，WirelessKey=WIFI密码）
+#启动WIFI配置
+netctl start wap
+```
+使用命令ifconfig查看wlan0接口是否启动
+
+如果你想开机就启动
+```bash
+netctl enable wpa
+```
 
 
 [无桌面参考](https://rocka.me/archive/my-first-archlinux-rpi3)
